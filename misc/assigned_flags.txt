@@ -1,0 +1,110 @@
+Buckler world flag: a8c
+Dragon Bone replacement world flag: a8d
+Pepper world flag: a8e
+Book of the Dead world flag: a8f
+Fake Silver Shield world flag: a90
+guild.exe replacement world flag: a91
+Anchor world flag: a92
+Surface coin chest world flag: a93 (2707)
+Misc replaced map world flags: a94-aa3 (2708-2723)
+Misc replaced random item world flags: 2699-
+
+random graphics: 2730-2760
+
+{COL 00-32-96} = software
+000-050-150 = enemy??
+{COL 150-000-100} = treasure
+{COL 96-32-00} = area
+{COL 00-78-78} = enemy(/boss?)
+37/mekuri:{FLAG 740:=1}   {ITEM 100}{FLAG 241:=2}  {FLAG 740:=0}
+245/pepper:{FLAG 740:=1}   {ITEM 30}{FLAG 552:=1}  {FLAG 740:=0}
+247/anchor:{FLAG 740:=1}   {ITEM 50}{FLAG 552:=2}  {FLAG 740:=0}
+249/mini doll:{FLAG 740:=1}   {FLAG 554:=2}  {ITEM 22}{FLAG 152:=2}  {FLAG 740:=0}
+364/xmailer:{FLAG 740:=1}   {ITEM 86}{FLAG 227:=1}  {FLAG 124:=1}{FLAG 740:=0}{FLAG 2900:=1}
+371/mulana talisman:{FLAG 740:=1}   {ITEM 73}{FLAG 261:=1}{FLAG 123:=150}  {FLAG 530:=3}{FLAG 124:=12}{FLAG 2905:=1}  {FLAG 740:=0}
+397/book of the dead:{FLAG 740:=1}   {FLAG 810:=2}{ITEM 54}{FLAG 740:=0}{FLAG 2805:=1}
+716/surface map:
+{FLAG 209:=1}I got a map and was looking at it as I walked.{BR}And then, I fell and sort of died.{BR}Heh heh--well, maybe it's not that funny...
+{CMD 0-0}
+
+mulbruk:
+912 / ? = reference to block 0x188 (before waking up, triggers the seal)
+990 / ? = reference to block 0x189 (intro after waking up)
+485 / 1e5 = master 1e6-1e7-1e8-1e9
+1082 / 43a = master 1e6-1e7-1e8-436
+1083 / 43b = master 1e6-1e7-1e8-437
+1013 / ? = provocative bathing suit conversation
+924 / ? = escape block, no check for swimsuit status
+926 / ? = escape block if mulbruk has swimsuit
+
+for Halloween 2019, acd (2765) = secret shop unlocked
+for Halloween 2019, ace (2766) = mulbruk conversation flag
+aab (2731): HT unlock fairy npc, should have been with the other group but wasn't, oops
+aac (2733): mulbruk > 0 = not spoken, 1 = did intro, 2 = ready to talk about HT, 3 = HT unlocked
+aad (2734): H4 tracking
+aae (2735): dracuet
+aaf-ac9 (2735-2761): halloween 2019 npc
+aca = halloween 2019 npc count
+
+for fools 2020, 2730-2761 (aaa-ac9) for spaulders
+for fools 2020, 2762 (aca) for spaulder following fakefeather
+for fools 2020 & 2021, 2763 - 2766 = random item graphics flags (only 2763-2765 currently used?)
+for fools 2020, 2767 / acf = feather flag
+
+for fools 2021, 2730-2745 (aaa-ab9) for grail flags
+for fools 2021, 2746 (aba) for escape timer flag pt1
+for fools 2021, 2747 (abb) for escape timer flag pt2
+for fools 2021, 2748 (abc) for treasury zip spaulder
+for fools 2021, 2749 (abd) for endless pit spaulder
+for fools 2021, 2750 (abe) for Ankh Jewel (Temple of the Sun) spaulder
+for fools 2021, 2751 (abf) for bronze mirror spaulder
+for fools 2021, 2752 (ac0) for isis pendant spaulder
+for fools 2021, 2753 (ac1) for knife spaulder
+for fools 2021, 2754 (ac2) for map (sun) spaulder
+for fools 2021, 2755 (ac3) for sacred orb (sun) spaulder
+for fools 2021, 2756 (ac4) for talisman spaulder
+for fools 2021, 2757 (ac5) for coin sun spaulder
+for fools 2021, 2758 (ac6) for shrine map spaulder
+
+replaceable flag: 2e3 is used on retrosurface to close xelpud's tent after talking to him; only 3 uses in rcd so it'd be easy to remove
+
+un-implemented features:
+inferno pushblock glove special: acb (2763)
+ruin pushblock glove special: acc (2764)
+retro grail flags: acd-acf 2765-2767
+
+xmailer conversation custom flag: ad0 (2768)
+Surface no-kill flag: ad1 (2769)
+Alternate mother ankh jewel recovery flag: ad2 (2770)
+---former Surface grail flag: ad3 (2771)
+---now using 54e for surface grail flag since it was formerly the tablet glow
+Wrong color medicine flag: ad4 (2772)
+Whip (removed/randomized) world flag: ad5 (2773)
+Extra ankh jewel flag: ad6 (2774)
+Whip (regular) world flag: 2775
+Graveyard trap chest puzzle flag: 2776
+Graveyard trap chest flag: 2777
+Exploding trap chest flag: 2778
+Sacred Orb fake item flag: 2779
+Ankh jewel fake item flag: 2780
+Removed Spaulder: add (2781)
+New untrue Shrine grail: ade (2782)
+Reserved perma-zero for old untrue Shrine grail: adf (2783)
+
+Pepper conversation flag: ae0 (2784)
+--formerly Mantra count timers: ae1-ae8 (2785-2792), now just updating mantra count on the 0xc2 instead
+Mantra tablet counter flag: ae9
+LAMULANA recited flag: aea
+Mantras unlocked flag (Giltoriyo): aeb
+Xelpud Talisman convos: aec (2796)
+Xelpud Mulana Talisman convos: aed
+Shrine map sound effect played flag: aee (2798)
+Cog of Soul chest: aef
+
+
+Screen flag 42: Shrine map sound effect
+Screen flag 43: Fake item and/or trap screen flag for floating items
+Screen flag 46: Fake item and/or trap screen flag for chests; also doubles as screen flag for one of the crushers on chain whip puzzle; also used for halloween stuff
+Screen flag 47: screen flag for the other crusher on chain whip puzzle
+
+Flag 20c (524): Formerly used for Illusion pot/warp, removed in randomizer and now available
