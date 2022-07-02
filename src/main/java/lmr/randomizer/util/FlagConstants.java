@@ -37,6 +37,7 @@ public final class FlagConstants {
     public static final int SPHINX_DESTROYED = 0x173; // Value 5 = destroyed
     public static final int SUN_GEYSER = 0x174; // Crusher; 1 = ascending; 2 = seal activated and now receding; 3 = gone
     public static final int SUN_WATCHTOWER_LIGHTS = 0x179; // 1,2=triggered 3=seen
+    public static final int SUN_WEAPON_COVER_KNIFE = 0x17c;
     public static final int SPHINX_DESTROYED_V2 = 0x17d; // Value 0 > 1 when 0x173 set to 5, not sure why both flags exist
     public static final int SUN_PYRAMID_SUN_FALLEN = 0x17e; // Set from hitting the hitbox to make the Sun fall; incremented when the Sun actually falls.
     public static final int SUN_FLOODED = 0x180; // Value 1 = flooded and spawns waterfalls; waterfalls are gone
@@ -97,6 +98,7 @@ public final class FlagConstants {
     public static final int SHRINE_DRAGON_BONE = 0x218; // Value 0 > 1 when Dragon Bone is placed
     public static final int SHRINE_DIARY_CHEST = 0x219; // Value 0 > 1 when Diary chest has been seen, 1 > 2 after talking to Xelpud, 2 > 3 after collecting chest contents
     public static final int SHRINE_SHAWN = 0x21b; // 1 applies to both spots you can see him
+    public static final int ILLUSION_STRAY_FAIRY_WALL = 0x225;
     public static final int EDEN_UNLOCKED = 0x226; // Value 0 > 1 when Eden is unlocked (placing a weight after getting Fruit of Eden)
     public static final int ILLUSION_PROGRESS_SKELETON_DAIS_TO_ELEVATOR = 0x227; // Value 0 > 1 when placing a weight on the skeleton in lower Illusion, 2 after solving "extinguish the whole", 3 via Lemeza detector in the elevator room on the way up to the grail
     public static final int MR_SLUSHFUND_CONVERSATION = 0x228; // Set to 1 in the conversation for receiving Pepper, set to 2 in the conversation for receiving Anchor.
@@ -130,6 +132,7 @@ public final class FlagConstants {
     public static final int GODDESS_STATUE_ILLUSION = 0x27a; // Value 0 > 1 to remove the Goddess statue blocking entry to Gate of Illusion
     public static final int GODDESS_PUZZLE_FLAIL_WHIP = 0x27b; // Value 0 > 1 when reading the tablet, 1 > 2 when solved, 2 > 3 when weapon cover is gone
     public static final int GODDESS_WALL_ILLUSION = 0x282; // Value 0 > 1 when breaking the wall left of the Tower of the Goddess grail tablet
+    public static final int GODDESS_PUZZLE_KEY_FAIRY = 0x283; // Value 0 > 1 when key fairy unlocks the Spaulder chest
     public static final int GODDESS_STATUE_SHIELD_ANIMATION = 0x284; // Goes to 2 when activated; 2 > 3 when gone
     public static final int GODDESS_PUZZLE_SHIELD_COIN_CHEST = 0x285; // Value 0 > 1 when breaking the wall for access to the coin chest; 1 > 2 via timer
     public static final int GODDESS_SHAWN_SEEN = 0x289;
@@ -156,6 +159,7 @@ public final class FlagConstants {
     public static final int BIRTH_NINJA_COIN_CHEST_PUZZLE_FLAG = 0x2a9;
     public static final int BIRTH_PUZZLE_PERFUME_CHEST = 0x2ab;
     public static final int BIRTH_MURAL_INSIDE_VISIBLE = 0x2ac;
+    public static final int BIRTH_LEANING_PILLAR = 0x2ae;
     public static final int BIRTH_PUZZLE_SOUTHEAST_COIN_CHEST = 0x2b0;
     public static final int BIRTH_PUZZLE_DANCE_COIN_CHEST = 0x2b2;
     public static final int TRUE_SHRINE_MOTHER_ANKH_SEAL_COUNT = 0x2b6; // Incremented by one for each of the four Mother ankh seals broken
@@ -692,7 +696,7 @@ public final class FlagConstants {
     public static final int TABLET_GLOW_EXTINCTION_LET_THE_MAP_GUIDE_ITS_PLACEMENT = 0x4ad; // Tablet block 180; room 06-04-01
     public static final int TABLET_GLOW_EXTINCTION_THOSE_SEEKING_EDEN = 0x4ae; // Tablet block 230; room 06-05-00
     public static final int TABLET_GLOW_EXTINCTION_EVERY_HEART_HAS_A_COLOR = 0x4af; // Tablet block 182; room 06-05-01
-    public static final int TABLET_GLOW_EXTINCTION_GATEKEEPERS = 0x4b0; // Tablet block 154; room 06-06-01
+    public static final int TABLET_GLOW_EXTINCTION_GATEKEEPERS_DAMAGED = 0x4b0; // Tablet block 154; room 06-06-01
     public static final int TABLET_GLOW_EXTINCTION_SHELL_IN_THE_LEFT_HAND_POINTS = 0x4b1; // Tablet block 174; room 06-07-00
     public static final int TABLET_GLOW_EXTINCTION_PROCEED_THROUGH_THE_WALL = 0x4b2; // Tablet block 181; room 06-07-00
     public static final int TABLET_GLOW_EXTINCTION_TWO_ANGEL_SHIELD = 0x4b3; // Tablet block 173; room 06-08-01
@@ -734,7 +738,7 @@ public final class FlagConstants {
     public static final int TABLET_GLOW_SHRINE_SEVENTH_CHILDREN = 0x4df; // Tablet block 242; room 09-05-01
     public static final int TABLET_GLOW_SHRINE_SLEEP_WITHIN_THE_WOMAN = 0x4e0; // Tablet block 243; room 09-08-01
     public static final int TABLET_GLOW_SHRINE_WALL_OF_YOUR_CALLING = 0x4e1; // Tablet block 234; room 09-08-01
-//    public static final int TABLET_GLOW_SHRINE_ROSETTA = 0x4e2; // Tablet block 239; room 09-09-00
+    public static final int TABLET_GLOW_SHRINE_ROSETTA = 0x4e2; // Tablet block 239; room 09-09-00
     public static final int TABLET_GLOW_SHRINE_MUSHUSSU_COMBO = 0x4e3; // Tablet block 236; room 09-09-01
 
     public static final int TABLET_GLOW_ILLUSION_VIRTUAL_WISE_MAN = 0x4e5; // Tablet block 253; room 10-01-00
@@ -803,7 +807,7 @@ public final class FlagConstants {
     public static final int TABLET_GLOW_RUIN_FOLLOW_THE_NAME_THAT_MEANS_UNNAMED = 0x526; // Tablet block 335; room 14-00-02
     public static final int TABLET_GLOW_RUIN_SKANDA = 0x527; // Tablet block 332; room 14-01-00
     public static final int TABLET_GLOW_RUIN_WHITE_DIAMOND_REPRESENTS_PURITY = 0x528; // Tablet block 336; room 14-02-01
-//    public static final int TABLET_GLOW_RUIN_ROSETTA = 0x529; // Tablet block 333; room 14-03-00
+    public static final int TABLET_GLOW_RUIN_ROSETTA = 0x529; // Tablet block 333; room 14-03-00
     public static final int TABLET_GLOW_RUIN_GREAT_BIRD_MERCY_CRUSHING_THAT_HAND = 0x52a; // Tablet block 331; room 14-03-01
     public static final int TABLET_GLOW_RUIN_TOO_QUICK_FOR_THE_EYES = 0x52b; // Tablet block 330; room 14-04-00
     public static final int TABLET_GLOW_RUIN_GLOWING_RED_CRUCIFIX_BEACON = 0x52c; // Tablet block 328; room 14-04-01
@@ -812,7 +816,7 @@ public final class FlagConstants {
     public static final int TABLET_GLOW_RUIN_THE_ONE_WHO_CHALLENGES_NUWA = 0x52f; // Tablet block 326; room 14-07-00
     public static final int TABLET_GLOW_RUIN_FACE_THE_LAST_TRIAL = 0x530; // Tablet block 327; room 14-07-01
 
-//    public static final int TABLET_GLOW_BIRTH_SWORDS_ROSETTA = 0x531; // Tablet block 353; room 15-00-00
+    public static final int TABLET_GLOW_BIRTH_SWORDS_ROSETTA = 0x531; // Tablet block 353; room 15-00-00
     public static final int TABLET_GLOW_BIRTH_SWORDS_BRIGHT_LIGHT_WITHIN_THE_DARKNESS = 0x532; // Tablet block 340; room 15-01-00
     public static final int TABLET_GLOW_BIRTH_SWORDS_CONTINUES_WITHOUT_END_BIRTH_DEATH = 0x533; // Tablet block 350; room 15-01-01
     public static final int TABLET_GLOW_BIRTH_SWORDS_SHALL_NOT_MAKE_IT_WITH_THINE_POWER = 0x534; // Tablet block 342; room 15-02-00
@@ -933,7 +937,7 @@ public final class FlagConstants {
             TABLET_GLOW_EXTINCTION_LET_THE_MAP_GUIDE_ITS_PLACEMENT,
             TABLET_GLOW_EXTINCTION_THOSE_SEEKING_EDEN,
             TABLET_GLOW_EXTINCTION_EVERY_HEART_HAS_A_COLOR,
-            TABLET_GLOW_EXTINCTION_GATEKEEPERS,
+            TABLET_GLOW_EXTINCTION_GATEKEEPERS_DAMAGED,
             TABLET_GLOW_EXTINCTION_SHELL_IN_THE_LEFT_HAND_POINTS,
             TABLET_GLOW_EXTINCTION_PROCEED_THROUGH_THE_WALL,
             TABLET_GLOW_EXTINCTION_TWO_ANGEL_SHIELD,
@@ -1064,6 +1068,12 @@ public final class FlagConstants {
             TABLET_GLOW_HT_SLEEP_ALSO_SET_BY_RETROMAUSOLEUM_ENTRANCE,
             TABLET_GLOW_HT_I_EXIST_HERE,
             TABLET_GLOW_HT_CLOTH_TO_MAKE_THE_TREASURE
+    );
+
+    public static final List<Integer> TRANSLATION_TABLET_GLOW_FLAGS = Arrays.asList(
+            TABLET_GLOW_SHRINE_ROSETTA,
+            TABLET_GLOW_SHRINE_ROSETTA,
+            TABLET_GLOW_SHRINE_ROSETTA
     );
 
     // Broken tablets
@@ -1244,6 +1254,83 @@ public final class FlagConstants {
     public static final short CUSTOM_HALLOWEEN2021_XELPUD_BONUS_CANDY_CONVERSATIONS = 0xab1;
     public static final short CUSTOM_HALLOWEEN2021_ESCAPE_SPECIAL = 0xab2; // Triggers a different escape sequence door for 111% completion.
     public static final short CUSTOM_HALLOWEEN2021_ESCAPE_CHEST = 0xab3; // Replaces escape chest world flag for autotracker consistency between random and nonrandom coin chests
+
+    // Fools 2022
+    public static final int CUSTOM_MANTRAS_NOTHING = 0xaaa;
+    public static final int CUSTOM_MANTRAS_BIRTH = 0xaab;
+    public static final int CUSTOM_MANTRAS_LIFE = 0xaac;
+    public static final int CUSTOM_MANTRAS_DEATH = 0xaad;
+    public static final int CUSTOM_MANTRAS_REBIRTH = 0xaae;
+    public static final int CUSTOM_MANTRAS_DECEIT = 0xaaf;
+    public static final int CUSTOM_MANTRAS_ETERNITY = 0xab0;
+    public static final int CUSTOM_MANTRAS_ASCENSION = 0xab1;
+    public static final int CUSTOM_MANTRAS_TOTAL = 0xab2;
+
+    public static final int CUSTOM_FOOLS2022_MULBRUK_ARMOR = 0xab3;
+
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_MULBRUK = 0xab4;
+    public static final int CUSTOM_FOOLS2022_GHOSTLORD = 0xab5;
+    public static final int CUSTOM_FOOLS2022_MANTRAS_ENABLED = 0xab6;
+    public static final int CUSTOM_FOOLS2022_SOUND_CANYON = 0xab7;
+    public static final int CUSTOM_FOOLS2022_ILLUSION_ITEM = 0xab8;
+    public static final int CUSTOM_FOOLS2022_BAT_CURRY = 0xab9;
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_BURNING_CAVERN = 0xaba;
+    public static final int CUSTOM_FOOLS2022_ESCAPE_TABLET = 0xabb;
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_KEY_SWORD = 0xabc;
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_FLARE_GUN = 0xabd;
+    public static final int CUSTOM_FOOLS2022_3KEYS_1 = 0xabe;
+    public static final int CUSTOM_FOOLS2022_3KEYS_2 = 0xabf;
+    public static final int CUSTOM_FOOLS2022_3KEYS_3 = 0xac0;
+    public static final int CUSTOM_FOOLS2022_BIRTH_WALL = 0xac1;
+    public static final int CUSTOM_FOOLS2022_CHEAT_CAT_PAUSE = 0xac2;
+    public static final int CUSTOM_FOOLS2022_GODDESS_EXIT = 0xac3;
+    public static final int CUSTOM_FOOLS2022_MOTHER_GATE = 0xac4;
+    public static final int CUSTOM_FOOLS2022_TIAMAT_GATE = 0xac5;
+    public static final int CUSTOM_FOOLS2022_CHOSE_VIOLENCE = 0xac6;
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_ILLUSION = 0xac7;
+    public static final int CUSTOM_FOOLS2022_DEAD = 0xac8;
+    public static final int CUSTOM_FOOLS2022_BOSSES_DEAD = 0xac9;
+    public static final int CUSTOM_FOOLS2022_RUIN_UPPER_SHORTCUT = 0xaca;
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_BURNING_CAVERN_2_SPAWN = 0xacb;
+    public static final int CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_BURNING_CAVERN_2_GLOW = 0xacc;
+    public static final int CUSTOM_FOOLS2022_HT_1 = TABLET_GLOW_TWIN_RIGHT_OF_POISON_2_BROKEN;
+    public static final int CUSTOM_FOOLS2022_HT_2 = TABLET_GLOW_TWIN_FAKE_ANKH_JEWEL_BROKEN;
+    public static final int CUSTOM_FOOLS2022_HT_3 = TABLET_GLOW_TWIN_ABOVE_YIEAR_BROKEN;
+    public static final int CUSTOM_FOOLS2022_HT_GLOW_1 = TABLET_GLOW_TWIN_ARROGANT_STURDY_SNAKE_BROKEN;
+    public static final int CUSTOM_FOOLS2022_HT_GLOW_2 = TABLET_GLOW_TWIN_LEFT_OF_BACKSIDE_GRAIL_BROKEN;
+    public static final int CUSTOM_FOOLS2022_HT_GLOW_3 = TABLET_GLOW_ENDLESS_FAIRY_SCREEN_BROKEN;
+    public static final int CUSTOM_FOOLS2022_HT_GRAIL = TABLET_GLOW_ILLUSION_CHILDS_ROOM_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR = TABLET_GLOW_ILLUSION_BACKSIDE_DOOR_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_SPAULDER = TABLET_GLOW_ILLUSION_MOVER_ATHLELAND_SCREEN_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_FAIRY_CLOTHES = TABLET_GLOW_ILLUSION_FOOLS_CONFUSION_CORRIDOR_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_BOOTS = TABLET_GLOW_ILLUSION_FOOLS_CONFUSION_CORRIDOR_SCAN_ROOM_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_GAUNTLET = TABLET_GLOW_GRAVEYARD_GIANT_THEXDE_SCREEN_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_HELMET = TABLET_GLOW_GRAVEYARD_GIANT_THEXDE_SCREEN_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_OTHER_SPAULDER = TABLET_GLOW_BIRTH_SKANDA_ASURAS_ROOM_BROKEN;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_OTHER_GAUNTLET = OBSOLETE_FREE_FLAG;
+    public static final int CUSTOM_FOOLS2022_MISC_VANDALISM = 2781; // 0xadd
+    public static final int CUSTOM_FOOLS2022_PACIFIST_PLANE_MODEL = MAIL_43;
+    public static final int CUSTOM_FOOLS2022_SPLIT_GATE_UNLOCKED = MAIL_42;
+    public static final int CUSTOM_FOOLS2022_PACIFIST_MOTHER_GATE_HINT_GLOW = MAIL_41;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ANKH = MAIL_40;
+    public static final int CUSTOM_FOOLS2022_MOTHER_ANKH_GONE = MAIL_39;
+    public static final int CUSTOM_FOOLS2022_SECRET_TREASURE_OF_LIFE = MAIL_38;
+    public static final int CUSTOM_FOOLS2022_CRYSTAL_SKULL_SECRET = MAIL_37;
+    public static final int CUSTOM_FOOLS2022_DIMENSIONAL_CHEATS = MAIL_36;
+    public static final int CUSTOM_FOOLS2022_MULBRUK_PACIFIST_HINT = MAIL_35;
+    public static final int CUSTOM_FOOLS2022_PACIFIST_HINT = MAIL_34;
+    public static final int CUSTOM_FOOLS2022_PACIFIST_HINT_GLOW = MAIL_33;
+    public static final int CUSTOM_FOOLS2022_MOONLIGHT_CHEAT_DETECTION = MAIL_32;
+    public static final int CUSTOM_FOOLS2022_SHELL_HORN_LOCATION = MAIL_31; // 0 = uncollected; 1 = last seen surface; 2 = collected surface;  3 = last seen goddess; 4 = collected goddess
+    public static final int CUSTOM_FOOLS2022_MISC_VIOLENCE = MAIL_30;
+    public static final int CUSTOM_FOOLS2022_MOTHER_MAIL_STATE = MAIL_29; // 0 = pacifism; 1 = vandalism; 2 = guardians alive; 3 = guardians dead; 4 = look ma no hands
+    public static final int CUSTOM_FOOLS2022_CHEATED = MAIL_28;
+    public static final int CUSTOM_FOOLS2022_BIRTH_MURAL = MAIL_27;
+    public static final int CUSTOM_FOOLS2022_RUIN_ENTRANCE_LEGIT = MAIL_26;
+    public static final int CUSTOM_FOOLS2022_FLOOR_BREAK = MAIL_25;
+    public static final int CUSTOM_FOOLS2022_GODDESS_STATUE_CHEAT_DETECTION = MAIL_24;
+    public static final int CUSTOM_FOOLS2022_BABEL_DETECTION = MAIL_23;
+    public static final int CUSTOM_FOOLS2022_PACIFIST_SHRINE_ENTRANCE = MAIL_22;
 
     // Steam achievements?
     public static final int TALKED_TO_AWAKENED_MULBRUK = 0xaf0;

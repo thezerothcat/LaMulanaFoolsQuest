@@ -205,7 +205,7 @@ public class RandomizationRcdUpdater extends RcdUpdater {
             chest.setUpdateWhenOpened(new WriteByteOperation(locationContentsData.getItemWorldFlag(), ByteOp.ASSIGN_FLAG, 1));
             chest.setUpdateWhenCollected(new WriteByteOperation(locationContentsData.getItemWorldFlag(), ByteOp.ASSIGN_FLAG, 1));
 
-            if(HolidaySettings.isFools2020Mode()) {
+            if(HolidaySettings.isFools2020Mode() || HolidaySettings.isFools2022Mode()) {
                 AddObject.addFoolsExplosion(chest.getObjectContainer(), chest.getX(), chest.getY(), locationContentsData.getItemWorldFlag());
             }
             else {
@@ -232,14 +232,17 @@ public class RandomizationRcdUpdater extends RcdUpdater {
             AddObject.addNoItemSoundEffect(chest.getObjectContainer(), locationContentsData.getNewWorldFlag(), (int)FlagConstants.SCREEN_FLAG_2E);
         }
         else if(locationContentsData.isRemovedItem()) {
-            if(random.nextBoolean()) {
+            if(HolidaySettings.isFools2022Mode()) {
+                chest.setDrops(ItemConstants.ANKH_JEWEL + ValueConstants.CHEST_ITEM_OFFSET, 1);
+            }
+            else if(random.nextBoolean()) {
                 chest.setDrops(DropType.COINS.getValue(), 10);
             }
             else {
                 chest.setDrops(DropType.WEIGHTS.getValue(), 1); // The game won't allow multiple weights, so just give 1
             }
-            updateChestGraphic(chest, false, random);
-            updateChestFlags(chest, locationContentsData.getLocationWorldFlag(), locationContentsData.getNewWorldFlag(), 2);
+            updateChestGraphic(chest, HolidaySettings.isFools2022Mode(), random);
+            updateChestFlags(chest, locationContentsData.getLocationWorldFlag(), locationContentsData.getNewWorldFlag(), HolidaySettings.isFools2022Mode() ? 1 : 2);
             if(HolidaySettings.isHalloween2021Mode() && ((Screen)chest.getObjectContainer()).getZoneIndex() != ZoneConstants.SURFACE) {
                 int safeScreenFlag = FlagConstants.getSafeScreenFlag(locationContentsData.getLocationWorldFlag());
                 chest.setUpdateWhenCollected(new WriteByteOperation(safeScreenFlag, ByteOp.ASSIGN_FLAG, 1));
@@ -307,8 +310,14 @@ public class RandomizationRcdUpdater extends RcdUpdater {
 
     private void updateFloatingItemContents(FloatingItem floatingItem, LocationContentsData locationContentsData) {
         if(locationContentsData.isRemovedItem()) {
-            floatingItem.setInventoryWord(locationContentsData.getItemInventoryArg());
-            floatingItem.setRealItem(false);
+            if(HolidaySettings.isFools2022Mode()) {
+                floatingItem.setInventoryWord(ItemConstants.ANKH_JEWEL);
+                floatingItem.setRealItem(true);
+            }
+            else {
+                floatingItem.setInventoryWord(locationContentsData.getItemInventoryArg());
+                floatingItem.setRealItem(false);
+            }
 
             updateWorldFlagTests(floatingItem, locationContentsData.getLocationWorldFlag(), locationContentsData.getNewWorldFlag(), false);
             updateWorldFlagUpdates(floatingItem, locationContentsData.getLocationWorldFlag(), locationContentsData.getNewWorldFlag());
@@ -319,7 +328,7 @@ public class RandomizationRcdUpdater extends RcdUpdater {
                 AddObject.addTrapItemBats(floatingItem, FlagConstants.SCREEN_FLAG_2B);
                 AddObject.addNoItemSoundEffect(floatingItem.getObjectContainer(), locationContentsData.getNewWorldFlag(), (int)FlagConstants.SCREEN_FLAG_2B);
             }
-            else {
+            else if(!HolidaySettings.isFools2022Mode()){
                 AddObject.addItemGive(floatingItem, ItemConstants.WEIGHT).addTests(
                         new TestByteOperation(locationContentsData.getNewWorldFlag(), ByteOp.FLAG_EQUALS, 2),
                         new TestByteOperation(FlagConstants.SCREEN_FLAG_2B, ByteOp.FLAG_EQUALS, 1));
@@ -518,7 +527,9 @@ public class RandomizationRcdUpdater extends RcdUpdater {
                     }
                     if(firstObject && "Transition: Birth R1".equals(transitionGateData.getGateDestination())) {
                         // Block leading into Skanda's room.
-                        AddObject.addSkandaBlock(gameObject);
+                        if(!HolidaySettings.isFools2022Mode()) {
+                            AddObject.addSkandaBlock(gameObject);
+                        }
                         updateFirstObject = true;
                     }
                     if(firstObject && transitionGateData.getGateDestination().contains("Transition: Twin ") && !transitionGateData.getGateName().equals("Transition: Twin U2")) {
@@ -658,7 +669,12 @@ public class RandomizationRcdUpdater extends RcdUpdater {
         // Handle special cases for door contents
         if("NPC: Nebur".equals(npcAssigned)) {
             ConversationDoorUpdates.addNeburObjects(conversationDoor, getNpcItemFlag("Mobile Super X2")); // Do this before adding tests, so we can carry over any tests based on the location.
-            conversationDoor.getTestByteOperations().add(new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_EQUALS, 0));
+            if(HolidaySettings.isFools2022Mode()) {
+                conversationDoor.getTestByteOperations().add(new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_NOT_EQUAL, 2));
+            }
+            else {
+                conversationDoor.getTestByteOperations().add(new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_EQUALS, 0));
+            }
             AddObject.addSpecialItemObjects(conversationDoor.getObjectContainer(), itemRandomizer.getNewContents("Mobile Super X2"));
         }
         if("NPC: Yiegah Kungfu".equals(npcAssigned)) {

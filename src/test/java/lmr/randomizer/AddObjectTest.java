@@ -2945,18 +2945,20 @@ public class AddObjectTest {
 
         AddObject.addMedicineStatueTimer(screen, medicineFlag);
 
-        GameObject gameObject = screen.getObjects().get(0);
-        Assert.assertEquals(gameObject.getId(), 0x0b);
-        Assert.assertEquals(gameObject.getX(), -1);
-        Assert.assertEquals(gameObject.getY(), -1);
-        Assert.assertEquals((int)gameObject.getArgs().get(0), 0);
-        Assert.assertEquals((int)gameObject.getArgs().get(1), 0);
-        Assert.assertEquals(gameObject.getArgs().size(), 2);
-        Assert.assertTrue(containsTest(gameObject, new TestByteOperation(medicineFlag, ByteOp.FLAG_EQUALS, 2)));
-        Assert.assertTrue(containsTest(gameObject, new TestByteOperation(0x34f, ByteOp.FLAG_EQUALS, 0)));
-        Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(0x34f, ByteOp.ASSIGN_FLAG, 1)));
-        Assert.assertEquals(gameObject.getTestByteOperations().size(), 2);
-        Assert.assertEquals(gameObject.getWriteByteOperations().size(), 1);
+        if(!HolidaySettings.isFools2022Mode()) {
+            GameObject gameObject = screen.getObjects().get(0);
+            Assert.assertEquals(gameObject.getId(), 0x0b);
+            Assert.assertEquals(gameObject.getX(), -1);
+            Assert.assertEquals(gameObject.getY(), -1);
+            Assert.assertEquals((int)gameObject.getArgs().get(0), 0);
+            Assert.assertEquals((int)gameObject.getArgs().get(1), 0);
+            Assert.assertEquals(gameObject.getArgs().size(), 2);
+            Assert.assertTrue(containsTest(gameObject, new TestByteOperation(medicineFlag, ByteOp.FLAG_EQUALS, 2)));
+            Assert.assertTrue(containsTest(gameObject, new TestByteOperation(0x34f, ByteOp.FLAG_EQUALS, 0)));
+            Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(0x34f, ByteOp.ASSIGN_FLAG, 1)));
+            Assert.assertEquals(gameObject.getTestByteOperations().size(), 2);
+            Assert.assertEquals(gameObject.getWriteByteOperations().size(), 1);
+        }
     }
 
     @Test
@@ -2985,25 +2987,27 @@ public class AddObjectTest {
         Assert.assertEquals(gameObject.getTestByteOperations().size(), 1);
         Assert.assertEquals(gameObject.getWriteByteOperations().size(), 1);
 
-        gameObject = screen.getObjects().get(1);
-        Assert.assertEquals(gameObject.getId(), 0x08);
-        Assert.assertEquals(gameObject.getX(), 560);
-        Assert.assertEquals(gameObject.getY(), 100);
-        Assert.assertEquals((int)gameObject.getArgs().get(0), 0);
-        Assert.assertEquals((int)gameObject.getArgs().get(1), 60);
-        Assert.assertEquals((int)gameObject.getArgs().get(2), -1);
-        Assert.assertEquals((int)gameObject.getArgs().get(3), 2);
-        Assert.assertEquals((int)gameObject.getArgs().get(4), 0);
-        Assert.assertEquals((int)gameObject.getArgs().get(5), 860);
-        Assert.assertEquals((int)gameObject.getArgs().get(6), 60);
-        Assert.assertEquals((int)gameObject.getArgs().get(7), 1);
-        Assert.assertEquals((int)gameObject.getArgs().get(8), 10);
-        Assert.assertEquals((int)gameObject.getArgs().get(9), 60);
-        Assert.assertEquals(gameObject.getArgs().size(), 10);
-        Assert.assertTrue(containsTest(gameObject, new TestByteOperation(362, ByteOp.FLAG_LT, 2)));
-        Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(362, ByteOp.ASSIGN_FLAG, 2)));
-        Assert.assertEquals(gameObject.getTestByteOperations().size(), 1);
-        Assert.assertEquals(gameObject.getWriteByteOperations().size(), 1);
+        if(!HolidaySettings.isFools2022Mode()) {
+            gameObject = screen.getObjects().get(1);
+            Assert.assertEquals(gameObject.getId(), 0x08);
+            Assert.assertEquals(gameObject.getX(), 560);
+            Assert.assertEquals(gameObject.getY(), 100);
+            Assert.assertEquals((int)gameObject.getArgs().get(0), 0);
+            Assert.assertEquals((int)gameObject.getArgs().get(1), 60);
+            Assert.assertEquals((int)gameObject.getArgs().get(2), -1);
+            Assert.assertEquals((int)gameObject.getArgs().get(3), 2);
+            Assert.assertEquals((int)gameObject.getArgs().get(4), 0);
+            Assert.assertEquals((int)gameObject.getArgs().get(5), 860);
+            Assert.assertEquals((int)gameObject.getArgs().get(6), 60);
+            Assert.assertEquals((int)gameObject.getArgs().get(7), 1);
+            Assert.assertEquals((int)gameObject.getArgs().get(8), 10);
+            Assert.assertEquals((int)gameObject.getArgs().get(9), 60);
+            Assert.assertEquals(gameObject.getArgs().size(), 10);
+            Assert.assertTrue(containsTest(gameObject, new TestByteOperation(362, ByteOp.FLAG_LT, 2)));
+            Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(362, ByteOp.ASSIGN_FLAG, 2)));
+            Assert.assertEquals(gameObject.getTestByteOperations().size(), 1);
+            Assert.assertEquals(gameObject.getWriteByteOperations().size(), 1);
+        }
     }
 
     @Test
@@ -5284,22 +5288,25 @@ public class AddObjectTest {
 
         AddObject.addMissingBacksideDoorGateTimerAndSound(screen, bossFlag, gateFlag);
 
-        GameObject gameObject = screen.getObjects().get(0);
-        Assert.assertEquals(gameObject.getId(), 0x0b);
-        Assert.assertEquals(gameObject.getX(), -1);
-        Assert.assertEquals(gameObject.getY(), -1);
-        Assert.assertEquals((int)gameObject.getArgs().get(0), 1);
-        Assert.assertEquals((int)gameObject.getArgs().get(1), 0);
-        Assert.assertEquals(gameObject.getArgs().size(), 2);
-        Assert.assertTrue(containsTest(gameObject, new TestByteOperation(bossFlag, ByteOp.FLAG_GTEQ, 3)));
-        Assert.assertTrue(containsTest(gameObject, new TestByteOperation(0x0ae, ByteOp.FLAG_EQUALS, 2)));
-        Assert.assertTrue(containsTest(gameObject, new TestByteOperation(gateFlag, ByteOp.FLAG_EQUALS, 0)));
-        Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(gateFlag, ByteOp.ASSIGN_FLAG, 1)));
-        Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(0x029, ByteOp.ASSIGN_FLAG, 1)));
-        Assert.assertEquals(gameObject.getTestByteOperations().size(), 3);
-        Assert.assertEquals(gameObject.getWriteByteOperations().size(), 2);
+        GameObject gameObject;
+        if(!HolidaySettings.isFools2022Mode()) {
+            gameObject = screen.getObjects().get(0);
+            Assert.assertEquals(gameObject.getId(), 0x0b);
+            Assert.assertEquals(gameObject.getX(), -1);
+            Assert.assertEquals(gameObject.getY(), -1);
+            Assert.assertEquals((int)gameObject.getArgs().get(0), 1);
+            Assert.assertEquals((int)gameObject.getArgs().get(1), 0);
+            Assert.assertEquals(gameObject.getArgs().size(), 2);
+            Assert.assertTrue(containsTest(gameObject, new TestByteOperation(bossFlag, ByteOp.FLAG_GTEQ, 3)));
+            Assert.assertTrue(containsTest(gameObject, new TestByteOperation(0x0ae, ByteOp.FLAG_EQUALS, 2)));
+            Assert.assertTrue(containsTest(gameObject, new TestByteOperation(gateFlag, ByteOp.FLAG_EQUALS, 0)));
+            Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(gateFlag, ByteOp.ASSIGN_FLAG, 1)));
+            Assert.assertTrue(containsUpdate(gameObject, new WriteByteOperation(0x029, ByteOp.ASSIGN_FLAG, 1)));
+            Assert.assertEquals(gameObject.getTestByteOperations().size(), 3);
+            Assert.assertEquals(gameObject.getWriteByteOperations().size(), 2);
+        }
 
-        gameObject = screen.getObjects().get(1);
+        gameObject = screen.getObjects().get(HolidaySettings.isFools2022Mode() ? 0 : 1);
         Assert.assertEquals(gameObject.getId(), 0x9b);
         Assert.assertEquals(gameObject.getX(), -1);
         Assert.assertEquals(gameObject.getY(), -1);

@@ -75,6 +75,10 @@ public class GraphicsTextureDraw extends GameObject {
         setY(y);
     }
 
+    public GraphicsTextureDraw(GameObject gameObject) {
+        super(gameObject);
+    }
+
     public void setLayer(int layer) {
         getArgs().set(0, (short)layer);
     }

@@ -1,5 +1,6 @@
 package lmr.randomizer.ui;
 
+import lmr.randomizer.HolidaySettings;
 import lmr.randomizer.Main;
 import lmr.randomizer.Translations;
 
@@ -31,15 +32,17 @@ public class ButtonPanel extends JPanel {
         restoreSavesButton.setActionCommand("restoreSaves");
         add(restoreSavesButton);
 
-        createZipButton = new JButton(Translations.getText("button.createZip"));
-        createZipButton.addActionListener(randomizerUI);
-        createZipButton.setActionCommand("createZip");
-        add(createZipButton);
+        if(!HolidaySettings.isFools2022Mode()) {
+            createZipButton = new JButton(Translations.getText("button.createZip"));
+            createZipButton.addActionListener(randomizerUI);
+            createZipButton.setActionCommand("createZip");
+            add(createZipButton);
 
-        seedImportButton = new JButton(Translations.getText("button.importSeed"));
-        seedImportButton.addActionListener(randomizerUI);
-        seedImportButton.setActionCommand("importSeed");
-        add(seedImportButton);
+            seedImportButton = new JButton(Translations.getText("button.importSeed"));
+            seedImportButton.addActionListener(randomizerUI);
+            seedImportButton.setActionCommand("importSeed");
+            add(seedImportButton);
+        }
     }
 
     public void updateTranslations() {

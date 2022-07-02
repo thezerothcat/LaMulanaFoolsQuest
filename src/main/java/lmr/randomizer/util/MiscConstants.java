@@ -201,8 +201,8 @@ public final class MiscConstants {
         if(blockNumber == BlockConstants.Tablet_Inferno_SnakesAreEnraged) {
             return "Tablet_Inferno_SnakesAreEnraged";
         }
-        if(blockNumber == BlockConstants.Tablet_Extinction_Gatekeepers) {
-            return "Tablet_Extinction_Gatekeepers";
+        if(blockNumber == BlockConstants.DamagedTablet_Extinction_Gatekeepers) {
+            return "DamagedTablet_Extinction_Gatekeepers";
         }
         if(blockNumber == BlockConstants.Tablet_Inferno_StickToTheWalls) {
             return "Tablet_Inferno_StickToTheWalls";
@@ -264,8 +264,8 @@ public final class MiscConstants {
         if(blockNumber == BlockConstants.Tablet_Inferno_LastJewelLiesWithin) {
             return "Tablet_Inferno_LastJewelLiesWithin";
         }
-        if(blockNumber == BlockConstants.DamagedTablet_Extinction_NuwaSleeps) {
-            return "DamagedTablet_Extinction_NuwaSleeps";
+        if(blockNumber == BlockConstants.Tablet_Extinction_NuwaSleeps) {
+            return "Tablet_Extinction_NuwaSleeps";
         }
         if(blockNumber == BlockConstants.Tablet_Twin_BlackOnyxPurpleAmethyst) {
             return "Tablet_Twin_BlackOnyxPurpleAmethyst";
@@ -366,9 +366,9 @@ public final class MiscConstants {
         if(blockNumber == BlockConstants.Tablet_Shrine_EightSpirits) {
             return "Tablet_Shrine_EightSpirits";
         }
-//        if(blockNumber == BlockConstants.Tablet_Shrine_Rosetta) {
-//            return "Tablet_Shrine_Rosetta";
-//        }
+        if(blockNumber == BlockConstants.Tablet_Shrine_Rosetta) {
+            return "Tablet_Shrine_Rosetta";
+        }
         if(blockNumber == BlockConstants.Tablet_Shrine_SecretTreasureOfLife) {
             return "Tablet_Shrine_SecretTreasureOfLife";
         }
@@ -555,9 +555,9 @@ public final class MiscConstants {
         if(blockNumber == BlockConstants.Tablet_Ruin_Skanda) {
             return "Tablet_Ruin_Skanda";
         }
-//        if(blockNumber == BlockConstants.Tablet_Ruin_Rosetta) {
-//            return "Tablet_Ruin_Rosetta";
-//        }
+        if(blockNumber == BlockConstants.Tablet_Ruin_Rosetta) {
+            return "Tablet_Ruin_Rosetta";
+        }
         if(blockNumber == BlockConstants.Tablet_Ruin_UnintentionalMischief) {
             return "Tablet_Ruin_UnintentionalMischief";
         }
@@ -606,9 +606,9 @@ public final class MiscConstants {
         if(blockNumber == BlockConstants.Tablet_Birth_VishnuBeheadedAsura) {
             return "Tablet_Birth_VishnuBeheadedAsura";
         }
-//        if(blockNumber == BlockConstants.Tablet_Birth_Rosetta) {
-//            return "Tablet_Birth_Rosetta";
-//        }
+        if(blockNumber == BlockConstants.Tablet_Birth_Rosetta) {
+            return "Tablet_Birth_Rosetta";
+        }
         if(blockNumber == BlockConstants.Tablet_Birth_WhiteOpalRepresentsJoy) {
             return "Tablet_Birth_WhiteOpalRepresentsJoy";
         }

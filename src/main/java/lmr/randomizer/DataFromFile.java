@@ -564,12 +564,17 @@ public final class DataFromFile {
                 tabletGlowFlags.add(tabletGlowFlag);
             }
         }
+        if(customTabletExists && !Settings.isAutomaticTranslations()) {
+            tabletGlowFlags.removeAll(FlagConstants.TRANSLATION_TABLET_GLOW_FLAGS);
+        }
         return customTabletExists ? tabletGlowFlags : new ArrayList<>(0);
     }
 
     private static boolean hasCustomTablet(int tabletGlowFlag) {
         Integer blockNumber = BlockConstants.getTabletBlockFromGlowFlag(tabletGlowFlag);
-        return blockNumber != null && (Translations.hasKey(MiscConstants.getScannableId(blockNumber) + ".Text"));
+        return blockNumber != null
+                && Translations.hasKey(MiscConstants.getScannableId(blockNumber) + ".Text")
+                && !Translations.getText(MiscConstants.getScannableId(blockNumber) + ".Text").isEmpty();
     }
 
     public static List<String> getHTItems(List<String> possibleItems) {

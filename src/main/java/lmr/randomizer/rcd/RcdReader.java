@@ -208,7 +208,18 @@ public final class RcdReader {
             }
             zones.add(zone);
             if(HolidaySettings.isFools2021Mode() && zoneIndex == 13) {
-                Settings.goddessMsdBytes = msdBytes;
+                Settings.holidayModMsdBytes = msdBytes;
+            }
+            else if(HolidaySettings.isFools2022Mode() && zoneIndex == 9) {
+                for(int rowIndex = 0; rowIndex < 5; rowIndex++) {
+                    for(int byteIndex = 0; byteIndex < 4; byteIndex++) {
+                        msdBytes[128 * (516 + rowIndex) + 85 + byteIndex] = 0;
+                    }
+                }
+                for(int byteIndex = 0; byteIndex < 6; byteIndex++) {
+                    msdBytes[128 * 521 + 85 + byteIndex] = 0;
+                }
+                Settings.holidayModMsdBytes = msdBytes;
             }
         }
         return zones;

@@ -948,7 +948,8 @@ public class BaseRcdUpdater extends RcdUpdater {
         if(Settings.isAlternateMotherAnkh()) {
             for (TestByteOperation testByteOperation : animation.getTestByteOperations()) {
                 if (testByteOperation.getIndex() == FlagConstants.MOTHER_STATE) {
-                    return false;
+                    return HolidaySettings.isFools2022Mode()
+                            && !animation.hasUpdate(new WriteByteOperation(FlagConstants.SCREEN_FLAG_17, ByteOp.ASSIGN_FLAG, 1));
                 }
             }
         }
@@ -1376,6 +1377,12 @@ public class BaseRcdUpdater extends RcdUpdater {
                         AddObject.addEscapeGate(transitionGate);
                     }
                 }
+                else if(screen.getZoneIndex() == ZoneConstants.NIGHT_SURFACE) {
+                    if(screen.getRoomIndex() == 11 && screen.getScreenIndex() == 1) {
+                        // gateName = "Transition: Surface R1";
+                        AddObject.addEscapeGate(transitionGate);
+                    }
+                }
             }
         }
     }
@@ -1784,10 +1791,12 @@ public class BaseRcdUpdater extends RcdUpdater {
 
         if(zoneIndex == 0) {
             if(roomIndex == 4 && screenIndex == 1) {
-                // Ensure you can't lose access to the Guidance elevator. // todo: maybe find a better solution that respects logic
-                AddObject.addSecondsTimer(screen, 0,
-                        Arrays.asList(new TestByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.FLAG_GT, 1), new TestByteOperation(FlagConstants.GUIDANCE_ELEVATOR, ByteOp.FLAG_EQUALS, 0)),
-                        Arrays.asList(new WriteByteOperation(FlagConstants.GUIDANCE_ELEVATOR, ByteOp.ASSIGN_FLAG, 1)));
+                if(!HolidaySettings.isFools2022Mode()) {
+                    // Ensure you can't lose access to the Guidance elevator. // todo: maybe find a better solution that respects logic
+                    AddObject.addSecondsTimer(screen, 0,
+                            Arrays.asList(new TestByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.FLAG_GT, 1), new TestByteOperation(FlagConstants.GUIDANCE_ELEVATOR, ByteOp.FLAG_EQUALS, 0)),
+                            Arrays.asList(new WriteByteOperation(FlagConstants.GUIDANCE_ELEVATOR, ByteOp.ASSIGN_FLAG, 1)));
+                }
             }
         }
         else if(zoneIndex == 1) {
@@ -1850,7 +1859,9 @@ public class BaseRcdUpdater extends RcdUpdater {
                         Arrays.asList(new WriteByteOperation(FlagConstants.PALENQUE_ANKH_PUZZLE, ByteOp.ASSIGN_FLAG, 2)));
             }
             else if(roomIndex == 9 && screenIndex == 1) {
-                AddObject.addPalenqueMSX2Timer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addPalenqueMSX2Timer(screen);
+                }
                 if(Settings.isRandomizeBosses()) {
                     AddObject.addTwinLabsPoisonTimerRemoval(screen, true);
                 }
@@ -1858,7 +1869,9 @@ public class BaseRcdUpdater extends RcdUpdater {
         }
         else if(zoneIndex == 7) {
             if(roomIndex == 15 && screenIndex == 2) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
 
             if(Settings.isRandomizeBosses()) {
@@ -1869,7 +1882,9 @@ public class BaseRcdUpdater extends RcdUpdater {
         }
         else if(zoneIndex == 8) {
             if(roomIndex == 0 && screenIndex == 0) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
         }
         else if(zoneIndex == 9 && roomIndex == 2 && screenIndex == 0) {
@@ -1877,7 +1892,9 @@ public class BaseRcdUpdater extends RcdUpdater {
         }
         else if(zoneIndex == 10) {
             if(roomIndex == 0 && screenIndex == 0) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
             if(roomIndex == 1 && screenIndex == 0) {
                 AddObject.addWeightDoorTimer(screen, FlagConstants.ROOM_FLAG_37);
@@ -1885,16 +1902,22 @@ public class BaseRcdUpdater extends RcdUpdater {
         }
         else if(zoneIndex == 11) {
             if(roomIndex == 0 && screenIndex == 1) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
         }
         else if(zoneIndex == 12) {
             if(roomIndex == 10 && screenIndex == 0) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
             if(roomIndex == 2) {
                 if(screenIndex == 0) {
-                    AddObject.addMoonlightPassageTimer(screen);
+                    if(!HolidaySettings.isFools2022Mode()) {
+                        AddObject.addMoonlightPassageTimer(screen);
+                    }
                 }
                 else if(screenIndex == 1) {
                     AddObject.addWeightDoorTimer(screen, FlagConstants.ROOM_FLAG_45);
@@ -1908,7 +1931,9 @@ public class BaseRcdUpdater extends RcdUpdater {
         }
         else if(zoneIndex == 13) {
             if(roomIndex == 5 && screenIndex == 0) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
             if(roomIndex == 5 && screenIndex == 1) {
                 AddObject.addFlailWhipPuzzleTimer(screen);
@@ -1917,19 +1942,24 @@ public class BaseRcdUpdater extends RcdUpdater {
                 AddObject.addFlailWhipPuzzleTimer(screen);
             }
             else if(roomIndex == 4 && screenIndex == 1) {
-                if(Settings.isAllowSubweaponStart()) {
+                if("Flare Gun".equals(Settings.getCurrentStartingWeapon())
+                        || "Earth Spear".equals(Settings.getCurrentStartingWeapon())) {
                     AddObject.addFloodedTowerShortcutTimer(screen);
                 }
             }
         }
         else if(zoneIndex == 14) {
             if(roomIndex == 6 && screenIndex == 1) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
         }
         else if(zoneIndex == 15) {
             if(roomIndex == 0 && screenIndex == 1) {
-                AddObject.addAllMantrasRecitedTimer(screen);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    AddObject.addAllMantrasRecitedTimer(screen);
+                }
             }
         }
         else if(zoneIndex == 17) {

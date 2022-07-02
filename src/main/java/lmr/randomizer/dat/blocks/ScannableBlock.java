@@ -32,4 +32,10 @@ public class ScannableBlock extends Block {
     public void setSlate(int slate) {
         ((ListEntry)getBlockContents().get(1)).getData().set(1, (short)slate);
     }
+
+//    public void removeSlate() {
+//        setSlate(NoImage);
+//        getBlockContents().remove(3);
+//        getBlockContents().remove(2);
+//    }
 }

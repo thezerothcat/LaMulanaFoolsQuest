@@ -8,8 +8,8 @@ import lmr.randomizer.randomization.data.GameObjectId;
 import java.util.*;
 
 public class FlagManager {
-    private static final int FIRST_AVAILABLE_RANDOM_GRAPHICS_FLAG = (HolidaySettings.isFools2020Mode() || HolidaySettings.isFools2021Mode()) ? 2762 : 2730;
-    private static final int LAST_AVAILABLE_RANDOM_GRAPHICS_FLAG = (HolidaySettings.isFools2020Mode() || HolidaySettings.isFools2021Mode()) ? 2765 : 2760;
+    private static final int FIRST_AVAILABLE_RANDOM_GRAPHICS_FLAG = (HolidaySettings.isFools2020Mode() || HolidaySettings.isFools2021Mode() || HolidaySettings.isFools2022Mode()) ? 2762 : 2730;
+    private static final int LAST_AVAILABLE_RANDOM_GRAPHICS_FLAG = (HolidaySettings.isFools2020Mode() || HolidaySettings.isFools2021Mode() || HolidaySettings.isFools2022Mode()) ? 2765 : 2760;
 
     private Map<Integer, Integer> mapOfItemLocationWorldFlagToAssignedReplacementFlag;
     private List<Integer> availableFlags;
@@ -49,7 +49,6 @@ public class FlagManager {
                 availableFlags.add(nameToDataMap.get(removedItem).getWorldFlag());
             }
         }
-        availableFlags.add(2781);
         availableFlags.add(FlagConstants.REMOVED_MAP_SURFACE);
         availableFlags.add(FlagConstants.REMOVED_MAP_GUIDANCE);
         availableFlags.add(FlagConstants.REMOVED_MAP_MAUSOLEUM);
@@ -66,20 +65,23 @@ public class FlagManager {
         availableFlags.add(FlagConstants.REMOVED_MAP_RUIN);
         availableFlags.add(FlagConstants.REMOVED_MAP_BIRTH);
         availableFlags.add(FlagConstants.REMOVED_MAP_DIMENSIONAL);
-        availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_RIGHT_OF_POISON_2_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_FAKE_ANKH_JEWEL_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_ABOVE_YIEAR_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_ARROGANT_STURDY_SNAKE_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_LEFT_OF_BACKSIDE_GRAIL_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_ENDLESS_FAIRY_SCREEN_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_CHILDS_ROOM_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_BACKSIDE_DOOR_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_MOVER_ATHLELAND_SCREEN_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_FOOLS_CONFUSION_CORRIDOR_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_FOOLS_CONFUSION_CORRIDOR_SCAN_ROOM_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_GRAVEYARD_GIANT_THEXDE_SCREEN_BROKEN);
-        availableFlags.add(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_ASURAS_ROOM_BROKEN);
-        availableFlags.add(FlagConstants.OBSOLETE_FREE_FLAG);
+        if(!HolidaySettings.isFools2022Mode()) {
+            availableFlags.add(2781);
+            availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_RIGHT_OF_POISON_2_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_FAKE_ANKH_JEWEL_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_ABOVE_YIEAR_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_ARROGANT_STURDY_SNAKE_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_TWIN_LEFT_OF_BACKSIDE_GRAIL_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_ENDLESS_FAIRY_SCREEN_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_CHILDS_ROOM_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_BACKSIDE_DOOR_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_MOVER_ATHLELAND_SCREEN_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_FOOLS_CONFUSION_CORRIDOR_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_ILLUSION_FOOLS_CONFUSION_CORRIDOR_SCAN_ROOM_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_GRAVEYARD_GIANT_THEXDE_SCREEN_BROKEN);
+            availableFlags.add(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_ASURAS_ROOM_BROKEN);
+            availableFlags.add(FlagConstants.OBSOLETE_FREE_FLAG);
+        }
 
         for(int flag = FIRST_AVAILABLE_RANDOM_GRAPHICS_FLAG; flag < LAST_AVAILABLE_RANDOM_GRAPHICS_FLAG; flag++) {
             availableFlags.add(flag);

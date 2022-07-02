@@ -372,6 +372,10 @@ public class BaseDatUpdater extends DatUpdater {
         if(customText != null) {
             scannableBlock.setScanText(buildTextEntryWithCommands(customText));
         }
+        Integer customLang = getCustomScanLang(scannableId);
+        if(customLang != null) {
+            scannableBlock.setLanguage(customLang);
+        }
     }
 
     protected String getCustomScanText(String scannableId) {
@@ -379,6 +383,27 @@ public class BaseDatUpdater extends DatUpdater {
             return null;
         }
         return Translations.getText(scannableId + ".Text");
+    }
+
+    protected Integer getCustomScanLang(String scannableId) {
+        if(scannableId == null) {
+            return null;
+        }
+        String language = Translations.getText(scannableId + ".Lang");
+        if(language == null) {
+            return null;
+        }
+        language = language.toLowerCase();
+        if(language.contains("rosetta")) {
+            return 3;
+        }
+        if(language.contains("ancient")) {
+            return 2;
+        }
+        if(language.contains("mulanese")) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override

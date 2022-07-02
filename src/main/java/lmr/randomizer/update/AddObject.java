@@ -1398,12 +1398,14 @@ public final class AddObject {
      * @param screen the screen to add the timers to
      */
     public static void addMedicineStatueTimer(ObjectContainer screen, int medicineWorldFlag) {
-        addFramesTimer(screen, 0,
-                Arrays.asList(
-                        new TestByteOperation(medicineWorldFlag, ByteOp.FLAG_EQUALS, 2),
-                        new TestByteOperation(FlagConstants.MEDICINE_SOLVED, ByteOp.FLAG_EQUALS, 0)),
-                Arrays.asList(
-                        new WriteByteOperation(FlagConstants.MEDICINE_SOLVED, ByteOp.ASSIGN_FLAG, 1)));
+        if(!HolidaySettings.isFools2022Mode()) {
+            addFramesTimer(screen, 0,
+                    Arrays.asList(
+                            new TestByteOperation(medicineWorldFlag, ByteOp.FLAG_EQUALS, 2),
+                            new TestByteOperation(FlagConstants.MEDICINE_SOLVED, ByteOp.FLAG_EQUALS, 0)),
+                    Arrays.asList(
+                            new WriteByteOperation(FlagConstants.MEDICINE_SOLVED, ByteOp.ASSIGN_FLAG, 1)));
+        }
     }
 
     /**
@@ -1430,22 +1432,24 @@ public final class AddObject {
         screen.getObjects().add(dais);
 
         // Toggle on
-        dais = new Dais(screen, 560, 100);
-//        dais.setDustAppearance(0);
-        dais.setFallingTime(60);
-        dais.setRise(-1);
-        dais.setImage(2);
-//        dais.setArg4(0);
-        dais.setImageX(860);
-        dais.setImageY(60);
-        dais.setFullWidth();
-        dais.setArg8(10);
-        dais.setRiseSpeed(60);
+        if(!HolidaySettings.isFools2022Mode()) {
+            dais = new Dais(screen, 560, 100);
+//            dais.setDustAppearance(0);
+            dais.setFallingTime(60);
+            dais.setRise(-1);
+            dais.setImage(2);
+//            dais.setArg4(0);
+            dais.setImageX(860);
+            dais.setImageY(60);
+            dais.setFullWidth();
+            dais.setArg8(10);
+            dais.setRiseSpeed(60);
 
-        dais.addTests(new TestByteOperation(FlagConstants.HARDMODE, ByteOp.FLAG_LT, 2));
-        dais.addUpdates(new WriteByteOperation(FlagConstants.HARDMODE, ByteOp.ASSIGN_FLAG, 2));
+            dais.addTests(new TestByteOperation(FlagConstants.HARDMODE, ByteOp.FLAG_LT, 2));
+            dais.addUpdates(new WriteByteOperation(FlagConstants.HARDMODE, ByteOp.ASSIGN_FLAG, 2));
 
-        screen.getObjects().add(dais);
+            screen.getObjects().add(dais);
+        }
     }
 
     public static boolean addSpecialItemObjects(String chestLocation, String chestContents) {
@@ -2269,6 +2273,9 @@ public final class AddObject {
 
         objectContainer.getObjects().add(0, doorSoundEffect);
 
+        if(HolidaySettings.isFools2022Mode()) {
+            return null;
+        }
         return addSecondsTimer(objectContainer, 1,
             Arrays.asList(
                     new TestByteOperation(bossFlag, ByteOp.FLAG_GTEQ, 3),
@@ -5048,6 +5055,9 @@ public final class AddObject {
             }
             else if(roomIndex == 6 && screenIndex == 0) {
                 addToAllScreens.addToScreen(screen, 0, 0);
+            }
+            else if(roomIndex == 6 && screenIndex == 1) {
+                addToAllScreens.addToScreen(screen, 640, 0);
             }
             else if(roomIndex == 7 && screenIndex == 0) {
                 addToAllScreens.addToScreen(screen, 0, 0);

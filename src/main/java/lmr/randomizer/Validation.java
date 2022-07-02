@@ -383,7 +383,8 @@ public class Validation {
                         "Custom placement error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            if(!DataFromFile.getRandomRemovableItems().contains(customRemovedItem)
+            if(!DataFromFile.getCustomPlacementData().isCustomOnlyMode()
+                    && !DataFromFile.getRandomRemovableItems().contains(customRemovedItem)
                     && !"Whip".equals(customRemovedItem)) {
                 JOptionPane.showMessageDialog(randomizerUI,
                         customRemovedItem + " cannot be a removed item",
@@ -804,6 +805,58 @@ public class Validation {
         }
         return true;
     }
+
+//    public static boolean validateFools2022(Main.RandomizerUI randomizerUI) {
+//        if(HolidaySettings.isFools2022Mode()){
+//            StringBuilder warnings = new StringBuilder("\nSome logic settings may be ignored");
+//            if(!Settings.isAlternateMotherAnkh()) {
+//                warnings.append('\n')
+//                        .append(String.format("The setting \"%s\" will be enabled", Translations.getText("gameplay.alternateMotherAnkh")));
+//            }
+//            if(Settings.isAutomaticGrailPoints()) {
+//                warnings.append('\n')
+//                        .append(String.format("The setting \"%s\" will be disabled", Translations.getText("gameplay.automaticGrailPoints")));
+//            }
+//            if(Settings.isReducedBossCount()) {
+//                warnings.append('\n')
+//                        .append("The setting \"Reduced boss count\" will be disabled");
+//            }
+//            if(!ShopRandomizationEnum.EVERYTHING.equals(Settings.getShopRandomization())) {
+//                warnings.append('\n')
+//                        .append("Shop randomization will be set to \"All items\"");
+//            }
+//            if(!Settings.isRandomizeCoinChests()) {
+//                warnings.append('\n')
+//                        .append(String.format("The setting \"%s\" will be enabled", Translations.getText("randomization.randomizeCoinChests")));
+//            }
+//            if(!Settings.isRandomizeTrapItems()) {
+//                warnings.append('\n')
+//                        .append(String.format("The setting \"%s\" will be enabled", Translations.getText("randomization.randomizeTrapItems")));
+//            }
+//            if(Settings.getMinRandomRemovedItems() > 0 || Settings.getMaxRandomRemovedItems() > 0
+//                    || Settings.isReplaceMapsWithWeights() || Settings.isRemoveMainWeapons() || Settings.isRemoveSpaulder()) {
+//                warnings.append('\n')
+//                        .append("Settings for removed items will be ignored");
+//            }
+//            if(Settings.isRandomizeGraphics()) {
+//                warnings.append('\n')
+//                        .append("Random graphics cannot be used");
+//            }
+//            if(!Settings.isHTFullRandom()) {
+//                warnings.append('\n')
+//                        .append("Provocative Bathing Suit will be set to fully random");
+//            }
+//            if(Settings.isRequireFullAccess()) {
+//                warnings.append('\n')
+//                        .append(String.format("The setting \"%s\" cannot be used", Translations.getText("logic.requireFullAccess.short")));
+//            }
+//            if(warnings.length() > 0) {
+//                warnings.deleteCharAt(0);
+//                JOptionPane.showMessageDialog(randomizerUI, warnings.toString(), "Settings for Fools", JOptionPane.WARNING_MESSAGE);
+//            }
+//        }
+//        return true;
+//    }
 
     public static boolean validateFools2020(Main.RandomizerUI randomizerUI) {
         if(HolidaySettings.isFools2020Mode()) {

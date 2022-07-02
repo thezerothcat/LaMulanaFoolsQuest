@@ -24,4 +24,9 @@ public enum DropType {
     public short getValue() {
         return value;
     }
+
+    public static boolean canDropCoinsOrAmmo(int dropType) {
+//        return dropType >= COINS.getValue() && dropType <= RANDOM_COINS_WEIGHTS_SOUL.getValue();
+        return dropType != NOTHING.getValue();
+    }
 }

@@ -1,6 +1,7 @@
 package lmr.randomizer.ui;
 
 import lmr.randomizer.FileUtils;
+import lmr.randomizer.HolidaySettings;
 import lmr.randomizer.Settings;
 import lmr.randomizer.Translations;
 import net.miginfocom.swing.MigLayout;
@@ -16,6 +17,7 @@ public class MainPanel extends JPanel {
     private JComboBox language;
 
     private JLabel seedNumberLabel;
+    private JLabel languageLabel;
     private JLabel laMulanaDirectoryLabel;
     private JLabel laMulanaSaveDirectoryLabel;
 
@@ -23,13 +25,17 @@ public class MainPanel extends JPanel {
         super(new MigLayout("fillx", "[][sg fields, fill, grow 80]", "[]"));
         setBorder(BorderFactory.createTitledBorder(Translations.getText("settings.main")));
 
-        seedNumber = new JTextField(Integer.toString(new Random().nextInt(Integer.MAX_VALUE)));
-        seedNumberLabel = new JLabel(Translations.getText("settings.seed"));
-        add(seedNumberLabel, "gap related");
-        add(seedNumber);
+        if(!HolidaySettings.isFools2022Mode()) {
+            seedNumber = new JTextField(Integer.toString(new Random().nextInt(Integer.MAX_VALUE)));
+            seedNumberLabel = new JLabel(Translations.getText("settings.seed"));
+            add(seedNumberLabel, "gap related");
+            add(seedNumber);
+        }
 
+        languageLabel = new JLabel(Translations.getText("settings.language"));
         language = new JComboBox(new String[]{"English", "日本語"});
         language.setSelectedIndex("en".equals(Settings.getLanguage()) ? 0 : 1);
+        add(languageLabel, "gap related");
         add(language, "grow 50, wrap");
 
         laMulanaDirectory = new JTextField(Settings.getLaMulanaBaseDir());
@@ -48,20 +54,27 @@ public class MainPanel extends JPanel {
     }
 
     public void rerollRandomSeed() {
-        seedNumber.setText(Integer.toString(new Random().nextInt(Integer.MAX_VALUE)));
+        if(!HolidaySettings.isFools2022Mode()) {
+            seedNumber.setText(Integer.toString(new Random().nextInt(Integer.MAX_VALUE)));
+        }
     }
 
     public void updateTranslations() {
         Settings.setLanguage(language.getSelectedIndex() == 0 ? "en" : "jp", true);
         setBorder(BorderFactory.createTitledBorder(Translations.getText("settings.main")));
-        seedNumberLabel.setText(Translations.getText("settings.seed"));
+        if(!HolidaySettings.isFools2022Mode()) {
+            seedNumberLabel.setText(Translations.getText("settings.seed"));
+        }
+        languageLabel.setText(Translations.getText("settings.language"));
         laMulanaDirectoryLabel.setText(Translations.getText("settings.dir"));
         laMulanaSaveDirectoryLabel.setText(Translations.getText("settings.saveDir"));
     }
 
     public void updateSettings() {
         try {
-            Settings.setStartingSeed(Integer.parseInt(seedNumber.getText()));
+            if(!HolidaySettings.isFools2022Mode()) {
+                Settings.setStartingSeed(Integer.parseInt(seedNumber.getText()));
+            }
             Settings.setLaMulanaBaseDir(laMulanaDirectory.getText(), true);
             Settings.setLaMulanaSaveDir(laMulanaSaveDirectory.getText(), true);
             Settings.setLanguage(language.getSelectedIndex() == 0 ? "en" : "jp", true);
@@ -72,6 +85,8 @@ public class MainPanel extends JPanel {
     }
 
     public void reloadSettings() {
-        seedNumber.setText(String.valueOf(Settings.getStartingSeed()));
+        if(!HolidaySettings.isFools2022Mode()) {
+            seedNumber.setText(String.valueOf(Settings.getStartingSeed()));
+        }
     }
 }

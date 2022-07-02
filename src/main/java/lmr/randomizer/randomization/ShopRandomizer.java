@@ -1,6 +1,7 @@
 package lmr.randomizer.randomization;
 
 import lmr.randomizer.DataFromFile;
+import lmr.randomizer.HolidaySettings;
 import lmr.randomizer.Settings;
 import lmr.randomizer.Translations;
 import lmr.randomizer.node.AccessChecker;
@@ -108,6 +109,11 @@ public abstract class ShopRandomizer {
     }
 
     private boolean isRemovedItem(String shopItem) {
+        if(HolidaySettings.isFools2022Mode()) {
+            if(ItemRandomizer.ALL_SUBWEAPONS.contains(shopItem)) {
+                return false;
+            }
+        }
         return Settings.getCurrentRemovedItems().contains(shopItem)
                 || Settings.getRemovedItems().contains(shopItem)
                 || Settings.getStartingItemsIncludingCustom().contains(shopItem)

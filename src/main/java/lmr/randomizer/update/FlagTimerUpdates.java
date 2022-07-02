@@ -42,6 +42,14 @@ public class FlagTimerUpdates {
                 return false;
             }
         }
+        if(HolidaySettings.isFools2022Mode()) {
+            if(isMailTimer(flagTimer)) {
+                return false;
+            }
+            if(isMail43Timer(flagTimer)) {
+                return false;
+            }
+        }
         ObjectContainer objectContainer = flagTimer.getObjectContainer();
         if(flagTimer.getObjectContainer() instanceof Screen) {
             if(isUnwantedScreenTimer(flagTimer, (Screen)objectContainer)) {

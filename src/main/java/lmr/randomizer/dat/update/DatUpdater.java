@@ -73,6 +73,7 @@ public abstract class DatUpdater {
         updatePriestAshgineConversationBlock(datFileData.getPriestAshgineConversationBlock());
         updateGiantThexdeConversationBlock(datFileData.getGiantThexdeConversationBlock());
         update8BitElderConversationBlock(datFileData.get8BitElderConversationBlock());
+        updateNightSurfaceXelpudConversationBlock(datFileData.getNightSurfaceXelpudConversationBlock());
         updatePhilosopherGiltoriyoConversationBlock(datFileData.getPhilosopherGiltoriyoConversationBlock());
         updatePhilosopherAlsedanaConversationBlock(datFileData.getPhilosopherAlsedanaConversationBlock());
         updatePhilosopherSamarantaConversationBlock(datFileData.getPhilosopherSamarantaConversationBlock());
@@ -156,6 +157,7 @@ public abstract class DatUpdater {
         updatePhilosopherFobosStoneReferenceBlock(datFileData.getPhilosopherFobosStoneReferenceBlock());
 
         updateXelpudFlagCheckBlock(datFileData.getXelpudFlagCheckBlock());
+        updateXelpudHeldItemCheckBlock(datFileData.getXelpudHeldItemCheckBlock());
         updateXelpudScoreCheckBlock(datFileData.getXelpudScoreCheckBlock());
         updateXelpudSpriteBlock(datFileData.getXelpudSpriteBlock());
         updateMulbrukFlagCheckBlock(datFileData.getMulbrukFlagCheckBlock());
@@ -213,6 +215,12 @@ public abstract class DatUpdater {
                 BlockSceneData sceneData = new BlockSceneData(0);
                 if(sceneData != null) {
                     textEntry.getData().addAll(sceneData.getRawData());
+                }
+            }
+            else if(section.startsWith("{FLAG ")) {
+                BlockFlagData flagData = getFlag(section.replaceAll("\\{FLAG ", "").replaceAll("}", ""));
+                if(flagData != null) {
+                    textEntry.getData().addAll(flagData.getRawData());
                 }
             }
             else {
@@ -551,6 +559,7 @@ public abstract class DatUpdater {
     void updatePriestAshgineConversationBlock(Block conversationBlock) { }
     void updateGiantThexdeConversationBlock(Block conversationBlock) { }
     void update8BitElderConversationBlock(Block conversationBlock) { }
+    void updateNightSurfaceXelpudConversationBlock(Block conversationBlock) { }
     void updatePhilosopherGiltoriyoConversationBlock(Block conversationBlock) { }
     void updatePhilosopherAlsedanaConversationBlock(Block conversationBlock) { }
     void updatePhilosopherSamarantaConversationBlock(Block conversationBlock) { }
@@ -604,6 +613,7 @@ public abstract class DatUpdater {
     void updatePhilosopherFobosStoneReferenceBlock(MasterNpcBlock referenceBlock) { }
 
     void updateXelpudFlagCheckBlock(CheckBlock flagCheckBlock) { }
+    void updateXelpudHeldItemCheckBlock(CheckBlock heldItemCheckBlock) { }
     void updateXelpudScoreCheckBlock(CheckBlock scoreCheckBlock) { }
     void updateXelpudSpriteBlock(Block spriteBlock) { }
     void updateMulbrukFlagCheckBlock(CheckBlock flagCheckBlock) { }
@@ -764,6 +774,19 @@ public abstract class DatUpdater {
     }
 
     private void updateBunemonText(List<Short> bunemonData, ShopInventoryData shopInventoryData, Short itemPrice) {
+        if(HolidaySettings.isFools2022Mode()) {
+            if(shopInventoryData.getInventoryArg() == ItemConstants.SHURIKEN
+                    || shopInventoryData.getInventoryArg() == ItemConstants.ROLLING_SHURIKEN
+                    || shopInventoryData.getInventoryArg() == ItemConstants.EARTH_SPEAR
+                    || shopInventoryData.getInventoryArg() == ItemConstants.FLARE_GUN
+                    || shopInventoryData.getInventoryArg() == ItemConstants.BOMB
+                    || shopInventoryData.getInventoryArg() == ItemConstants.CHAKRAM
+                    || shopInventoryData.getInventoryArg() == ItemConstants.CALTROPS) {
+                bunemonData.addAll(FileUtils.stringToData(Translations.getText("event.fools2022.soldout")));
+                return;
+            }
+        }
+
         if(HolidaySettings.isFools2020Mode()) {
             if(shopInventoryData.getInventoryArg() == ItemConstants.SCRIPTURES) {
                 bunemonData.addAll(FileUtils.stringToData(Translations.getText("items.HeatproofCase")));

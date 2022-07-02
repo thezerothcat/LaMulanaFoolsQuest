@@ -373,13 +373,15 @@ public final class ConversationDoorUpdates {
      * @param doorObject the base npc door object, to use as a positional reference
      */
     public static void addNeburObjects(ConversationDoor doorObject, int itemFlagMSX2) {
-        AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,
-                Arrays.asList(
-                        new TestByteOperation(itemFlagMSX2, ByteOp.FLAG_NOT_EQUAL, 0),
-                        new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_NOT_EQUAL, 2)),
-                Arrays.asList(
-                        new WriteByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.ASSIGN_FLAG, 2),
-                        new WriteByteOperation(FlagConstants.SCORE, ByteOp.ADD_FLAG, 2)));
+        if(!HolidaySettings.isFools2022Mode()) {
+            AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,
+                    Arrays.asList(
+                            new TestByteOperation(itemFlagMSX2, ByteOp.FLAG_NOT_EQUAL, 0),
+                            new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_NOT_EQUAL, 2)),
+                    Arrays.asList(
+                            new WriteByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.ASSIGN_FLAG, 2),
+                            new WriteByteOperation(FlagConstants.SCORE, ByteOp.ADD_FLAG, 2)));
+        }
 
         ConversationDoor neburShop = new ConversationDoor(doorObject.getObjectContainer(), doorObject.getX(), doorObject.getY());
         neburShop.setDoorType(ConversationDoor.Shop);
@@ -387,7 +389,12 @@ public final class ConversationDoorUpdates {
         for(TestByteOperation testByteOperation : doorObject.getTestByteOperations()) {
             neburShop.getTestByteOperations().add(testByteOperation);
         }
-        neburShop.getTestByteOperations().add(new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_GTEQ, 1));
+        if(HolidaySettings.isFools2022Mode()) {
+            neburShop.getTestByteOperations().add(new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_EQUALS, 2));
+        }
+        else {
+            neburShop.getTestByteOperations().add(new TestByteOperation(FlagConstants.XELPUD_CONVERSATION_MSX2, ByteOp.FLAG_GTEQ, 1));
+        }
         neburShop.getTestByteOperations().add(new TestByteOperation(itemFlagMSX2, ByteOp.FLAG_EQUALS, 0));
         doorObject.getObjectContainer().getObjects().add(neburShop);
 
@@ -412,21 +419,23 @@ public final class ConversationDoorUpdates {
                         new TestByteOperation(FlagConstants.MULBRUK_CONVERSATION_AWAKE, ByteOp.FLAG_EQUALS, 1)),
                 Arrays.asList(new WriteByteOperation(FlagConstants.MULBRUK_CONVERSATIONS_EARLY, ByteOp.ASSIGN_FLAG, 3)));
 
-        if((Settings.isRandomizeForbiddenTreasure() && Settings.isHTFullRandom()) || Settings.isRandomizeDracuetShop()) {
-            // Skip 8-boss requirement on HT.
-            AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,
-                    Arrays.asList(
-                            new TestByteOperation(FlagConstants.MULBRUK_CONVERSATION_HT, ByteOp.FLAG_EQUALS, 1),
-                            new TestByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.FLAG_EQUALS, 0)),
-                    Arrays.asList(new WriteByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.ASSIGN_FLAG, 1)));
-        }
-        else {
-            AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,
-                    Arrays.asList(
-                            new TestByteOperation(FlagConstants.MULBRUK_CONVERSATION_HT, ByteOp.FLAG_EQUALS, 1),
-                            new TestByteOperation(FlagConstants.BOSSES_SHRINE_TRANSFORM, ByteOp.FLAG_EQUALS, 9),
-                            new TestByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.FLAG_EQUALS, 0)),
-                    Arrays.asList(new WriteByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.ASSIGN_FLAG, 1)));
+        if(!HolidaySettings.isFools2022Mode()) {
+            if((Settings.isRandomizeForbiddenTreasure() && Settings.isHTFullRandom()) || Settings.isRandomizeDracuetShop()) {
+                // Skip 8-boss requirement on HT.
+                AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,
+                        Arrays.asList(
+                                new TestByteOperation(FlagConstants.MULBRUK_CONVERSATION_HT, ByteOp.FLAG_EQUALS, 1),
+                                new TestByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.ASSIGN_FLAG, 1)));
+            }
+            else {
+                AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,
+                        Arrays.asList(
+                                new TestByteOperation(FlagConstants.MULBRUK_CONVERSATION_HT, ByteOp.FLAG_EQUALS, 1),
+                                new TestByteOperation(FlagConstants.BOSSES_SHRINE_TRANSFORM, ByteOp.FLAG_EQUALS, 9),
+                                new TestByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.HT_UNLOCK_PROGRESS_EARLY, ByteOp.ASSIGN_FLAG, 1)));
+            }
         }
 
         AddObject.addFramesTimer(doorObject.getObjectContainer(), 0,

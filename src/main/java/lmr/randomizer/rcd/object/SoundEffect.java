@@ -48,6 +48,7 @@ public class SoundEffect extends GameObject {
     public static final int ShellHornSuccess = 30;
     public static final int ItemCollected = 39;
     public static final int ShellHornFailure = 80;
+    public static final int CrusherMove = 96;
 
     public SoundEffect(ObjectContainer objectContainer) {
         super(objectContainer, 15);

@@ -101,6 +101,34 @@ public final class SaveFileUpdates {
             setFlagValue(saveData, FlagConstants.ELLMAC_ANKH_PUZZLE, 5); // Ellmac ankh puzzle solved
             setFlagValue(saveData, FlagConstants.EXTINCTION_TEMP_LIGHT, 1); // Default Extinction lighting
         }
+        if(HolidaySettings.isFools2022Mode()) {
+            setFlagValue(saveData, FlagConstants.SPRING_FLOODED, 1);
+            setFlagValue(saveData, FlagConstants.SPRING_LEFT_HATCH, 1);
+            setFlagValue(saveData, FlagConstants.SPRING_RIGHT_HATCH, 1);
+            setFlagValue(saveData, FlagConstants.MOONLIGHT_TO_TWIN_BREAKABLE_FLOOR, 1);
+//            setFlagValue(saveData, FlagConstants.MAUSOLEUM_PUZZLE_COIN_CHEST, 2);
+//            setFlagValue(saveData, FlagConstants.SURFACE_PUZZLE_WATERFALL_COIN_CHEST, 2);
+            setFlagValue(saveData, FlagConstants.NEBRA_SKY_DISK, 2);
+            setFlagValue(saveData, FlagConstants.MOONLIGHT_ANUBIS_FLOOR_STATE, 3);
+            setFlagValue(saveData, FlagConstants.SPRING_SEAL_O5, 1);
+            setFlagValue(saveData, FlagConstants.SPRING_FLOOD_LEVER, 3);
+            setFlagValue(saveData, FlagConstants.GODDESS_HATCHES_UNLOCKED, 1);
+            setFlagValue(saveData, FlagConstants.TABLET_GLOW_GODDESS_WATER_TO_THE_TOWER, 1); // todo: check this
+            setFlagValue(saveData, FlagConstants.TABLET_GLOW_GUIDANCE_ENTRANCE_BROKEN, 1); // todo: check this
+            setInventoryCount(saveData, ItemConstants.WEIGHT, 0);
+            setInventoryCount(saveData, ItemConstants.COIN, 1);
+            setInventoryCount(saveData, ItemConstants.BUCKLER, 1);
+            saveData[4129] = (byte)1;
+            saveData[4131] = (byte)1;
+            saveData[4133] = (byte)1;
+            saveData[4135] = (byte)1;
+            saveData[4137] = (byte)1;
+            saveData[4139] = (byte)1;
+            saveData[4141] = (byte)1;
+
+            saveData[4624] = (byte)ItemConstants.BUCKLER; // Held subweapon item number
+            saveData[4627] = (byte)8; // Held subweapon slot number
+        }
 
         return saveData;
     }
@@ -259,20 +287,11 @@ public final class SaveFileUpdates {
                     saveData[0x072 * 2 + 0x1011 + 1] = (byte)3; // Ammo
                     saveData[0x074 * 2 + 0x1011 + 1] = (byte)6; // Ammo
                 }
-                else {
-                    saveData[4129] = (byte)1;
-                    saveData[4131] = (byte)1;
-                    saveData[4133] = (byte)1;
-                    saveData[4135] = (byte)1;
-                    saveData[4137] = (byte)1;
-                    saveData[4139] = (byte)1;
-                    saveData[4141] = (byte)1;
-                    saveData[4143] = (byte)1;
-
-                    saveData[4624] = (byte)19; // Held subweapon item number
-                    saveData[4627] = (byte)9; // Held subweapon slot number
-                    saveData[ItemConstants.ANKH_JEWEL * 2 + ValueConstants.SAVE_FILE_ITEM_COUNT_OFFSET + 1] = (byte)1; // Ammo
-                }
+//                else if("Ankh Jewel".equals(startingWeapon)) {
+//                    saveData[4624] = (byte)ItemConstants.ANKH_JEWEL; // Held subweapon item number
+//                    saveData[4627] = (byte)9; // Held subweapon slot number
+//                    setInventoryCount(saveData, ItemConstants.ANKH_JEWEL, 1);
+//                }
             }
         }
     }

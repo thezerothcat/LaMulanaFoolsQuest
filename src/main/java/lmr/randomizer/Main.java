@@ -380,9 +380,13 @@ public class Main {
         }
 
         private boolean backupMsd() {
-            File msdFile = new File("map13.msd.bak");
+            return backupMsd(HolidaySettings.isFools2021Mode() ? "map13.msd" : "map09.msd");
+        }
+
+        private boolean backupMsd(String filename) {
+            File msdFile = new File(filename + ".bak");
             if(!msdFile.exists()) {
-                File existingMsd = new File(Settings.getLaMulanaBaseDir(), "data/mapdata/map13.msd");
+                File existingMsd = new File(Settings.getLaMulanaBaseDir(), "data/mapdata/" + filename);
                 if(!existingMsd.exists()) {
                     JOptionPane.showMessageDialog(this,
                             "Unable to find file " + existingMsd.getAbsolutePath(),
@@ -392,15 +396,15 @@ public class Main {
 
                 try {
                     // Make map13.msd backup
-                    FileOutputStream fileOutputStream = new FileOutputStream(new File("map13.msd.bak"));
+                    FileOutputStream fileOutputStream = new FileOutputStream(new File(filename + ".bak"));
                     Files.copy(existingMsd.toPath(), fileOutputStream);
                     fileOutputStream.flush();
                     fileOutputStream.close();
                 }
                 catch (Exception ex) {
-                    FileUtils.log("Unable to back up map13.msd: " + ex.getMessage());
+                    FileUtils.log("Unable to back up " + filename + ": " + ex.getMessage());
                     FileUtils.logException(ex);
-                    throw new RuntimeException("Unable to back up map13.msd. Please see logs for more information.");
+                    throw new RuntimeException("Unable to back up " + filename + ". Please see logs for more information.");
                 }
             }
             return true;
@@ -466,6 +470,15 @@ public class Main {
                     fileOutputStream.close();
                     FileUtils.logFlush("msd copy complete");
                 }
+                if(HolidaySettings.isFools2022Mode()) {
+                    FileUtils.logFlush("Copying msd file from seed folder to La-Mulana install directory");
+                    fileOutputStream = new FileOutputStream(new File(String.format("%s/data/mapdata/map09.msd",
+                            Settings.getLaMulanaBaseDir(), Settings.getLanguage())));
+                    Files.copy(new File(String.format("%s/map09.msd", Settings.getStartingSeed())).toPath(), fileOutputStream);
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                    FileUtils.logFlush("msd copy complete");
+                }
 
                 if(Settings.isSaveFileNeeded()) {
                     FileUtils.logFlush("Copying save file from seed folder to La-Mulana save directory");
@@ -517,6 +530,13 @@ public class Main {
                 backupFile = new File("map13.msd.bak");
                 if(backupFile.exists()) {
                     fileOutputStream = new FileOutputStream(new File(Settings.getLaMulanaBaseDir() + "/data/mapdata/map13.msd"));
+                    Files.copy(backupFile.toPath(), fileOutputStream);
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                }
+                backupFile = new File("map09.msd.bak");
+                if(backupFile.exists()) {
+                    fileOutputStream = new FileOutputStream(new File(Settings.getLaMulanaBaseDir() + "/data/mapdata/map09.msd"));
                     Files.copy(backupFile.toPath(), fileOutputStream);
                     fileOutputStream.flush();
                     fileOutputStream.close();
@@ -629,7 +649,10 @@ public class Main {
             if(!Validation.validateFools2021(this)) {
                 return false;
             }
-            if(!Validation.validateCustomPlacements(this)) {
+//            if(!Validation.validateFools2022(this)) {
+//                return false;
+//            }
+            if(!HolidaySettings.isCustomPlacementValidationDisabled() && Validation.validateCustomPlacements(this)) {
                 return false;
             }
             if (!Validation.validateRemovedItems(this)) {
@@ -845,7 +868,9 @@ public class Main {
                 itemRandomizer.assignRandomGraphics(flagManager.getTotalUnallocatedFlags(), random);
 
                 dialog.updateProgress(85, Translations.getText("progress.spoiler"));
-                outputLocations(itemRandomizer, shopRandomizer, npcRandomizer, transitionGateRandomizer, backsideDoorRandomizer, sealRandomizer, attempt);
+                if(!HolidaySettings.isFools2022Mode()) {
+                    outputLocations(itemRandomizer, shopRandomizer, npcRandomizer, transitionGateRandomizer, backsideDoorRandomizer, sealRandomizer, attempt);
+                }
 
                 dialog.updateProgress(90, Translations.getText("progress.read"));
 
@@ -879,7 +904,10 @@ public class Main {
                 FileUtils.logFlush("Writing msd file");
 
                 if(HolidaySettings.isFools2021Mode()) {
-                    FileUtils.writeMsd();
+                    FileUtils.writeGoddessMsd();
+                }
+                if(HolidaySettings.isFools2022Mode()) {
+                    FileUtils.writeShrineMsd();
                 }
                 FileUtils.logFlush("msd file successfully written");
                 if(Settings.isSaveFileNeeded()) {
@@ -906,6 +934,13 @@ public class Main {
                     if(!GraphicsFileUpdater.updateGraphicsFilesForFools2020(Settings.getGraphicsPack())) {
                         JOptionPane.showMessageDialog(f,
                                 Translations.getText("Unable to create Fools 2020 graphics"),
+                                "Randomizer error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                if(HolidaySettings.isFools2022Mode()) {
+                    if(!GraphicsFileUpdater.updateGraphicsFilesForFools2022(Settings.getGraphicsPack())) {
+                        JOptionPane.showMessageDialog(f,
+                                Translations.getText("Unable to create Fools 2022 graphics"),
                                 "Randomizer error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -1127,6 +1162,11 @@ public class Main {
     }
 
     private static void determineStartingWeapon(Random random) {
+        if(HolidaySettings.isFools2022Mode()) {
+            Settings.setCurrentStartingWeapon("Ankh Jewel");
+            return;
+        }
+
         CustomPlacementData customPlacementData = DataFromFile.getCustomPlacementData();
         String customStartingWeapon = customPlacementData.getStartingWeapon();
         if(customStartingWeapon != null) {
@@ -1230,6 +1270,11 @@ public class Main {
         if(HolidaySettings.isFools2021Mode()) {
             List<String> giants = Arrays.asList("Zebu", "Bado", "Migela", "Ledo", "Abuto", "Ji", "Ribu", "Sakit"); // not Futo
             Settings.setCurrentGiant(giants.get(random.nextInt(giants.size())));
+        }
+        if(HolidaySettings.isFools2022Mode()) {
+//            List<String> giants = Arrays.asList("Zeb", "Bud", "Migera", "Led", "Fut");
+//            Settings.setCurrentGiant(giants.get(random.nextInt(giants.size())));
+            Settings.setCurrentGiant("Bud");
         }
     }
 

@@ -156,6 +156,9 @@ public class DatFileData {
     public Block get8BitElderConversationBlock() {
         return datFileEntries.get(BlockConstants.NpcConversation_8BitElder);
     }
+    public Block getNightSurfaceXelpudConversationBlock() {
+        return datFileEntries.get(BlockConstants.NpcConversation_Xelpud_NightSurface);
+    }
     public Block getPhilosopherGiltoriyoConversationBlock() {
         return datFileEntries.get(BlockConstants.NpcConversation_PhilosopherGiltoriyo);
     }
@@ -400,6 +403,9 @@ public class DatFileData {
     public CheckBlock getXelpudFlagCheckBlock() {
         return (CheckBlock)datFileEntries.get(BlockConstants.XelpudFlagCheckBlock);
     }
+    public CheckBlock getXelpudHeldItemCheckBlock() {
+        return (CheckBlock)datFileEntries.get(BlockConstants.XelpudHeldItemCheckBlock);
+    }
     public CheckBlock getXelpudScoreCheckBlock() {
         return (CheckBlock)datFileEntries.get(BlockConstants.XelpudScoreCheckBlock);
     }
@@ -474,6 +480,39 @@ public class DatFileData {
         List<ScannableBlock> tabletBlocks = new ArrayList<>();
         for(int blockNumber : BlockConstants.TABLET_BLOCKS) {
             tabletBlocks.add((ScannableBlock)datFileEntries.get(blockNumber));
+        }
+        if(HolidaySettings.isFools2022Mode()) {
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_BIRTH));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_DEATH));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_MARDUK));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_SABBAT));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_MU));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_VIY));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_BAHRUN));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_WEDJET));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_ABUTO));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MantraTablet_LAMULANA));
+
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Surface));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Guidance));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Mausoleum));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Sun));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Spring));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Inferno));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Extinction));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_TwinFront));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Endless));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Shrine));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Illusion));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Graveyard));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Moonlight));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Goddess));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Ruin));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Birth));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_TwinBack));
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.GrailTablet_Dimensional));
+
+            tabletBlocks.add((ScannableBlock)datFileEntries.get(BlockConstants.MegaTablet_HT_BecameAPhantom));
         }
         return tabletBlocks;
     }

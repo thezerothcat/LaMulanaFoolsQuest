@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>lmr.randomizer</groupId>
     <artifactId>randomizer</artifactId>
-    <version>2.34.0</version>
+    <version>FOOLS2022.20</version>
     <name>La-Mulana Remake Randomizer</name>
     <description>La-Mulana Remake Randomizer</description>
     <packaging>jar</packaging>
@@ -63,7 +63,8 @@
                                         <include>**/min/**/*</include>
                                         <include>**/rcd/**/*</include>
                                         <include>**/requirement/**/*</include>
-                                        <include>**/graphics/halloween2021/**/*</include>
+                                        <include>**/fools2022/**/*</include>
+                                        <include>**/graphics/fools2022/**/*</include>
                                         <include>**/01effect-custom.png</include>
                                     </includes>
                                 </resource>

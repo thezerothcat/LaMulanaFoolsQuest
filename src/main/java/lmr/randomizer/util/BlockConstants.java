@@ -120,6 +120,7 @@ public final class BlockConstants {
     public static final int NpcConversation_Moger = 472; // Moger - Surface NPC, 01-02-00
     public static final int NpcConversation_PhilosopherFobos_MedicineCheck = 478; // Philosopher Fobos - Dimensional NPC, 17-02-00
     public static final int NpcConversation_8BitElder = 514; // 8bit Elder - Gate of Time NPC, 21-00-00
+    public static final int NpcConversation_Xelpud_NightSurface = 997; // Xelpud - Night Surface NPC, 22-02-01
 
     public static final int Master_Hiner = 671; // Hiner - Surface NPC, 01-00-02
     public static final int Master_Moger = 672; // Moger - Surface NPC, 01-02-00
@@ -162,6 +163,7 @@ public final class BlockConstants {
     public static final int Master_MulbrukEscapeRegular = 924; // 0x39c
     public static final int Master_MulbrukEscapeSwimsuit = 926; // 0x39e
     public static final short Master_FairyQueen_TrueShrine2 = 985; // The Fairy Queen - Endless NPC, 08-01-00
+    public static final short Master_Xelpud_NightSurface = 996; // Xelpud - Night Surface NPC, 22-02-01
     public static final int Master_Mulbruk_ProvocativeBathingSuitReaction = 1013;
 
     public static final int EmptyConversation = 471;
@@ -221,6 +223,7 @@ public final class BlockConstants {
     public static final int ShopBlockTailorDracuet = 1008; // Tailor Dracuet - HT NPC, 23-08-01
 
     public static final int XelpudFlagCheckBlock = 480;
+    public static final int XelpudHeldItemCheckBlock = 481;
     public static final int XelpudScoreCheckBlock = 482;
     public static final int MulbrukFlagCheckBlock = 486;
     public static final int MulbrukScoreCheckBlock = 488;
@@ -313,7 +316,7 @@ public final class BlockConstants {
     public static final int Tablet_Spring_MothersWrath = 146; // Glow flag = TABLET_GLOW_SPRING_MOTHERS_WRATH
     public static final int Tablet_Spring_ThoseSeekingEden = 147; // Glow flag = TABLET_GLOW_SPRING_THOSE_SEEKING_EDEN
     public static final int Tablet_Inferno_SnakesAreEnraged = 150; // Glow flag = TABLET_GLOW_INFERNO_SNAKES_ARE_ENRAGED
-    public static final int Tablet_Extinction_Gatekeepers = 154; // Glow flag = TABLET_GLOW_EXTINCTION_GATEKEEPERS
+    public static final int DamagedTablet_Extinction_Gatekeepers = 154; // Glow flag = TABLET_GLOW_EXTINCTION_GATEKEEPERS
     public static final int Tablet_Inferno_StickToTheWalls = 155; // Glow flag = TABLET_GLOW_INFERNO_STICK_TO_THE_WALLS
     public static final int Tablet_Inferno_ErrJustOnce = 156; // Glow flag = TABLET_GLOW_INFERNO_ERR_JUST_ONCE
     public static final int DamagedTablet_Inferno_PhilosophersStone = 157; // Glow flag = TABLET_GLOW_INFERNO_PHILOSOPHERS_STONE_DAMAGED
@@ -334,7 +337,7 @@ public final class BlockConstants {
     public static final int Tablet_Extinction_ProceedThroughTheWall = 181; // Glow flag = TABLET_GLOW_EXTINCTION_PROCEED_THROUGH_THE_WALL
     public static final int Tablet_Extinction_EveryHeartHasAColor = 182; // Glow flag = TABLET_GLOW_EXTINCTION_EVERY_HEART_HAS_A_COLOR
     public static final int Tablet_Inferno_LastJewelLiesWithin = 183; // Glow flag = TABLET_GLOW_INFERNO_LAST_JEWEL_LIES_WITHIN
-    public static final int DamagedTablet_Extinction_NuwaSleeps = 184; // Glow flag = TABLET_GLOW_EXTINCTION_NUWA_SLEEPS
+    public static final int Tablet_Extinction_NuwaSleeps = 184; // Glow flag = TABLET_GLOW_EXTINCTION_NUWA_SLEEPS
     public static final int Tablet_Twin_BlackOnyxPurpleAmethyst = 189; // Glow flag = TABLET_GLOW_TWIN_BLACK_ONYX_PURPLE_AMETHYST
     public static final int DamagedTablet_Twin_FrontAndBack = 190; // Glow flag = TABLET_GLOW_TWIN_FRONT_AND_BACK_DAMAGED
     public static final int Tablet_Moonlight_EdenSearchOutThePlace = 191; // Glow flag = TABLET_GLOW_MOONLIGHT_EDEN_SEARCH_OUT_THE_PLACE
@@ -368,7 +371,7 @@ public final class BlockConstants {
     public static final int Tablet_Shrine_PhilosopherChosenOne = 235; // Glow flag = TABLET_GLOW_SHRINE_PHILOSOPHER_CHOSEN_ONE
     public static final int Tablet_Shrine_MushussuCombo = 236; // Glow flag = TABLET_GLOW_SHRINE_MUSHUSSU_COMBO
     public static final int Tablet_Shrine_EightSpirits = 238; // Glow flag = TABLET_GLOW_SHRINE_EIGHT_SPIRITS
-//    public static final int Tablet_Shrine_Rosetta = 239; // Glow flag = TABLET_GLOW_SHRINE_ROSETTA
+    public static final int Tablet_Shrine_Rosetta = 239; // Glow flag = TABLET_GLOW_SHRINE_ROSETTA
     public static final int Tablet_Shrine_SecretTreasureOfLife = 240; // Glow flag = TABLET_GLOW_SHRINE_SECRET_TREASURE_OF_LIFE
     public static final int Tablet_Shrine_PhilosopherImmortal = 241; // Glow flag = TABLET_GLOW_SHRINE_PHILOSOPHER_IMMORTAL
     public static final int Tablet_Shrine_SeventhChildren = 242; // Glow flag = TABLET_GLOW_SHRINE_SEVENTH_CHILDREN
@@ -431,7 +434,7 @@ public final class BlockConstants {
     public static final int Tablet_Ruin_GreatBirdMercyCrushingThatHand = 330; // Glow flag = TABLET_GLOW_RUIN_GREAT_BIRD_MERCY_CRUSHING_THAT_HAND
     public static final int Tablet_Ruin_TooQuickForTheEyes = 331; // Glow flag = TABLET_GLOW_RUIN_TOO_QUICK_FOR_THE_EYES
     public static final int Tablet_Ruin_Skanda = 332; // Glow flag = TABLET_GLOW_RUIN_SKANDA
-//    public static final int Tablet_Ruin_Rosetta = 333; // Glow flag = TABLET_GLOW_RUIN_ROSETTA
+    public static final int Tablet_Ruin_Rosetta = 333; // Glow flag = TABLET_GLOW_RUIN_ROSETTA
     public static final int Tablet_Ruin_UnintentionalMischief = 334; // Glow flag = TABLET_GLOW_RUIN_UNINTENTIONAL_MISCHIEF
     public static final int Tablet_Ruin_FollowTheNameThatMeansUnnamed = 335; // Glow flag = TABLET_GLOW_RUIN_FOLLOW_THE_NAME_THAT_MEANS_UNNAMED
     public static final int Tablet_Ruin_WhiteDiamondRepresentsPurity = 336; // Glow flag = TABLET_GLOW_RUIN_WHITE_DIAMOND_REPRESENTS_PURITY
@@ -448,7 +451,7 @@ public final class BlockConstants {
     public static final int Tablet_Birth_ContinuesWithoutEndBirthDeath = 350; // Glow flag = TABLET_GLOW_BIRTH_SWORDS_CONTINUES_WITHOUT_END_BIRTH_DEATH
     public static final int Tablet_Birth_ChallengePalenque = 351; // Glow flag = TABLET_GLOW_BIRTH_SKANDA_CHALLENGE_PALENQUE
     public static final int Tablet_Birth_VishnuBeheadedAsura = 352; // Glow flag = TABLET_GLOW_BIRTH_SWORDS_VISHNU_BEHEADED_ASURA
-//    public static final int Tablet_Birth_Rosetta = 353; // Glow flag = TABLET_GLOW_BIRTH_SWORDS_ROSETTA
+    public static final int Tablet_Birth_Rosetta = 353; // Glow flag = TABLET_GLOW_BIRTH_SWORDS_ROSETTA
     public static final int Tablet_Birth_WhiteOpalRepresentsJoy = 354; // Glow flag = TABLET_GLOW_BIRTH_SKANDA_WHITE_OPAL_REPRESENTS_JOY
     public static final int Tablet_Birth_CrystalSkullSuppressesTiamat = 355; // Glow flag = TABLET_GLOW_BIRTH_SKANDA_CRYSTAL_SKULL_SUPPRESSES_TIAMAT
     public static final int Tablet_Birth_DanceInThisPlace = 356; // Glow flag = TABLET_GLOW_BIRTH_SKANDA_DANCE_IN_THIS_PLACE
@@ -566,7 +569,7 @@ public final class BlockConstants {
             Tablet_Spring_MothersWrath,
             Tablet_Spring_ThoseSeekingEden,
             Tablet_Inferno_SnakesAreEnraged,
-            Tablet_Extinction_Gatekeepers,
+            DamagedTablet_Extinction_Gatekeepers,
             Tablet_Inferno_StickToTheWalls,
             Tablet_Inferno_ErrJustOnce,
             DamagedTablet_Inferno_PhilosophersStone,
@@ -587,7 +590,7 @@ public final class BlockConstants {
             Tablet_Extinction_ProceedThroughTheWall,
             Tablet_Extinction_EveryHeartHasAColor,
             Tablet_Inferno_LastJewelLiesWithin,
-            DamagedTablet_Extinction_NuwaSleeps,
+            Tablet_Extinction_NuwaSleeps,
             Tablet_Twin_BlackOnyxPurpleAmethyst,
             DamagedTablet_Twin_FrontAndBack,
             Tablet_Moonlight_EdenSearchOutThePlace,
@@ -621,7 +624,7 @@ public final class BlockConstants {
             Tablet_Shrine_PhilosopherChosenOne,
             Tablet_Shrine_MushussuCombo,
             Tablet_Shrine_EightSpirits,
-//            Tablet_Shrine_Rosetta,
+            Tablet_Shrine_Rosetta,
             Tablet_Shrine_SecretTreasureOfLife,
             Tablet_Shrine_PhilosopherImmortal,
             Tablet_Shrine_SeventhChildren,
@@ -684,7 +687,7 @@ public final class BlockConstants {
             Tablet_Ruin_GreatBirdMercyCrushingThatHand,
             Tablet_Ruin_TooQuickForTheEyes,
             Tablet_Ruin_Skanda,
-//            Tablet_Ruin_Rosetta,
+            Tablet_Ruin_Rosetta,
             Tablet_Ruin_UnintentionalMischief,
             Tablet_Ruin_FollowTheNameThatMeansUnnamed,
             Tablet_Ruin_WhiteDiamondRepresentsPurity,
@@ -701,7 +704,7 @@ public final class BlockConstants {
             Tablet_Birth_ContinuesWithoutEndBirthDeath,
             Tablet_Birth_ChallengePalenque,
             Tablet_Birth_VishnuBeheadedAsura,
-//            Tablet_Birth_Rosetta,
+            Tablet_Birth_Rosetta,
             Tablet_Birth_WhiteOpalRepresentsJoy,
             Tablet_Birth_CrystalSkullSuppressesTiamat,
             Tablet_Birth_DanceInThisPlace,
@@ -1021,7 +1024,7 @@ public final class BlockConstants {
             return BlockConstants.Tablet_Extinction_SeekTheRighteousSpirit;
         }
         if(tabletGlowFlag == FlagConstants.TABLET_GLOW_EXTINCTION_NUWA_SLEEPS) {
-            return BlockConstants.DamagedTablet_Extinction_NuwaSleeps;
+            return BlockConstants.Tablet_Extinction_NuwaSleeps;
         }
         if(tabletGlowFlag == FlagConstants.TABLET_GLOW_EXTINCTION_LARGE_CRUCIFIX_SUMMON_PALENQUE) {
             return BlockConstants.Tablet_Extinction_LargeCrucifixSummonPalenque;
@@ -1047,8 +1050,8 @@ public final class BlockConstants {
         if(tabletGlowFlag == FlagConstants.TABLET_GLOW_EXTINCTION_EVERY_HEART_HAS_A_COLOR) {
             return BlockConstants.Tablet_Extinction_EveryHeartHasAColor;
         }
-        if(tabletGlowFlag == FlagConstants.TABLET_GLOW_EXTINCTION_GATEKEEPERS) {
-            return BlockConstants.Tablet_Extinction_Gatekeepers;
+        if(tabletGlowFlag == FlagConstants.TABLET_GLOW_EXTINCTION_GATEKEEPERS_DAMAGED) {
+            return BlockConstants.DamagedTablet_Extinction_Gatekeepers;
         }
         if(tabletGlowFlag == FlagConstants.TABLET_GLOW_EXTINCTION_SHELL_IN_THE_LEFT_HAND_POINTS) {
             return BlockConstants.DamagedTablet_Extinction_ShellInTheLeftHandPoints;

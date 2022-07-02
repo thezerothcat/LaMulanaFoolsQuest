@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
  * Created by thezerothcat on 7/10/2017.
  */
 public class FileUtils {
-    public static final String VERSION = "2.34.0";
+    public static final String VERSION = "2.0.0";
 
     private static BufferedWriter logWriter;
     private static final List<String> KNOWN_RCD_FILE_HASHES = new ArrayList<>();
@@ -313,7 +313,7 @@ public class FileUtils {
 
     public static CustomPlacementData getCustomPlacementData() {
         CustomPlacementData customPlacementData = new CustomPlacementData();
-        if (!(new File("custom-placement.txt").exists())) {
+        if(!HolidaySettings.isHolidayMode() && !(new File("custom-placement.txt").exists())) {
             return customPlacementData;
         }
         try(BufferedReader reader = getResourceReader("custom-placement.txt", HolidaySettings.getResourcePath())) {
@@ -959,11 +959,12 @@ public class FileUtils {
                 FileUtils.logFlush("dat copy complete");
             }
 
-            fileToCopy = new File(String.format("%s/map13.msd", destinationFolder));
+            String msdFile = HolidaySettings.isFools2021Mode() ? "map13.msd" : "map09.msd";
+            fileToCopy = new File(String.format("%s/%s", destinationFolder, msdFile));
             if(fileToCopy.exists()) {
                 FileUtils.logFlush("Copying msd file from seed folder to La-Mulana install directory");
-                FileOutputStream fileOutputStream = new FileOutputStream(new File(String.format("%s/data/mapdata/map13.msd",
-                        Settings.getLaMulanaBaseDir())));
+                FileOutputStream fileOutputStream = new FileOutputStream(new File(String.format("%s/data/mapdata/%s",
+                        Settings.getLaMulanaBaseDir(), msdFile)));
                 Files.copy(fileToCopy.toPath(), fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
@@ -989,6 +990,9 @@ public class FileUtils {
             }
             if(HolidaySettings.isFools2020Mode()) {
                 GraphicsFileUpdater.updateGraphicsFilesForFools2020(Settings.getGraphicsPack());
+            }
+            if(HolidaySettings.isFools2022Mode()) {
+                GraphicsFileUpdater.updateGraphicsFilesForFools2022(Settings.getGraphicsPack());
             }
 
             FileUtils.logFlush("Save file copy complete");
@@ -1052,10 +1056,23 @@ public class FileUtils {
         }
     }
 
-    public static void writeMsd() {
+    public static void writeGoddessMsd() {
         try {
             DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(String.format("%d/map13.msd", Settings.getStartingSeed())));
-            for(byte msdByte : Settings.goddessMsdBytes) {
+            for(byte msdByte : Settings.holidayModMsdBytes) {
+                dataOutputStream.writeByte(msdByte);
+            }
+            dataOutputStream.flush();
+            dataOutputStream.close();
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public static void writeShrineMsd() {
+        try {
+            DataOutputStream dataOutputStream = new DataOutputStream(new FileOutputStream(String.format("%d/map09.msd", Settings.getStartingSeed())));
+            for(byte msdByte : Settings.holidayModMsdBytes) {
                 dataOutputStream.writeByte(msdByte);
             }
             dataOutputStream.flush();

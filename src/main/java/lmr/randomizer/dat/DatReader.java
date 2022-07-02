@@ -1,6 +1,7 @@
 package lmr.randomizer.dat;
 
 import lmr.randomizer.DataFromFile;
+import lmr.randomizer.HolidaySettings;
 import lmr.randomizer.Settings;
 import lmr.randomizer.dat.blocks.*;
 import lmr.randomizer.dat.blocks.contents.*;
@@ -212,6 +213,14 @@ public final class DatReader {
             listEntry = buildListEntry(dataInputStream, false);
             dataIndex += listEntry.getSize() / 2;
             scannableBlock.getBlockContents().add(listEntry);
+        }
+        else if(HolidaySettings.isFools2022Mode() && dataIndex < numberOfShortsInThisBlock
+                && (blockIndex == BlockConstants.GrailTablet_Surface
+                || blockIndex == BlockConstants.Tablet_Inferno_StickToTheWalls
+                || blockIndex == BlockConstants.Tablet_Moonlight_EdenSearchOutThePlace
+                || blockIndex == BlockConstants.Tablet_Graveyard_MeaningsAreInfusedIntoTheGemstones)) {
+            // Deal with some irregular tablets that have a trailing end-of-entry indicator for no apparent reason.
+            dataInputStream.readShort(); // 0x000a
         }
         return scannableBlock;
     }
@@ -1053,10 +1062,41 @@ public final class DatReader {
                     || BlockConstants.TABLET_BLOCKS.contains(blockIndex)) {
                 block = buildScannableBlock(blockIndex, dataInputStream, numberOfBytesInThisBlock / 2);
             }
+            else if(HolidaySettings.isFools2022Mode()
+                    && (blockIndex == BlockConstants.MantraTablet_BIRTH
+                    || blockIndex == BlockConstants.MantraTablet_DEATH
+                    || blockIndex == BlockConstants.MantraTablet_MARDUK
+                    || blockIndex == BlockConstants.MantraTablet_SABBAT
+                    || blockIndex == BlockConstants.MantraTablet_MU
+                    || blockIndex == BlockConstants.MantraTablet_VIY
+                    || blockIndex == BlockConstants.MantraTablet_BAHRUN
+                    || blockIndex == BlockConstants.MantraTablet_WEDJET
+                    || blockIndex == BlockConstants.MantraTablet_ABUTO
+                    || blockIndex == BlockConstants.MantraTablet_LAMULANA
+                    || blockIndex == BlockConstants.GrailTablet_Surface
+                    || blockIndex == BlockConstants.GrailTablet_Guidance
+                    || blockIndex == BlockConstants.GrailTablet_Mausoleum
+                    || blockIndex == BlockConstants.GrailTablet_Sun
+                    || blockIndex == BlockConstants.GrailTablet_Spring
+                    || blockIndex == BlockConstants.GrailTablet_Inferno
+                    || blockIndex == BlockConstants.GrailTablet_Extinction
+                    || blockIndex == BlockConstants.GrailTablet_TwinFront
+                    || blockIndex == BlockConstants.GrailTablet_Endless
+                    || blockIndex == BlockConstants.GrailTablet_Shrine
+                    || blockIndex == BlockConstants.GrailTablet_Illusion
+                    || blockIndex == BlockConstants.GrailTablet_Graveyard
+                    || blockIndex == BlockConstants.GrailTablet_Moonlight
+                    || blockIndex == BlockConstants.GrailTablet_Goddess
+                    || blockIndex == BlockConstants.GrailTablet_Ruin
+                    || blockIndex == BlockConstants.GrailTablet_Birth
+                    || blockIndex == BlockConstants.GrailTablet_TwinBack
+                    || blockIndex == BlockConstants.GrailTablet_Dimensional)) {
+                block = buildScannableBlock(blockIndex, dataInputStream, numberOfBytesInThisBlock / 2);
+            }
             else if(blockIndex == BlockConstants.ShopBlockGiantMopiranAngelShield) {
                 block = buildShopBlock(blockIndex, dataInputStream, numberOfBytesInThisBlock / 2);
             }
-            else if(blockIndex == BlockConstants.XelpudFlagCheckBlock || blockIndex == BlockConstants.XelpudScoreCheckBlock
+            else if(blockIndex == BlockConstants.XelpudFlagCheckBlock || blockIndex == BlockConstants.XelpudHeldItemCheckBlock || blockIndex == BlockConstants.XelpudScoreCheckBlock
                     || blockIndex == BlockConstants.MulbrukFlagCheckBlock || blockIndex == BlockConstants.MulbrukScoreCheckBlock) {
                 block = buildCheckBlock(blockIndex, dataInputStream, numberOfBytesInThisBlock / 2);
             }

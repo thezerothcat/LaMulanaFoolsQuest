@@ -47,7 +47,9 @@ public class ValueConstants {
     public static final short NPC_SPRITE_MULBRUK = 736; // 0x2e0
     public static final short NPC_SPRITE_FAIRY_QUEEN = 737; // 0x2e1
     public static final int NPC_SPRITE_USE_BACKGROUND = 0x2f0;
+    public static final int NPC_SPRITE_NIGHT_XELPUD = 0x2f2;
 
+    public static final int NPC_MUSIC_NIGHT_XELPUD = 3; // 0x003;
     public static final int NPC_MUSIC_ELDER_XELPUD = 4; // 0x004;
     public static final short NPC_MUSIC_MULBRUK = 15; // 0x00f;
     public static final int NPC_MUSIC_STONE_PHILOSOPHER = 18; // 0x012;

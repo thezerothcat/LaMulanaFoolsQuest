@@ -38,28 +38,42 @@ public class TabbedPanel extends JTabbedPane {
         }
 
         randomizationPanel = new RandomizationPanel();
-        addTab(Translations.getText("settings.items"), randomizationPanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.items"), randomizationPanel);
+        }
 
         locationPanel = new LocationPanel();
-        addTab(Translations.getText("settings.locations"), locationPanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.locations"), locationPanel);
+        }
 
-//        enemiesPanel = new EnemiesPanel();
-//        addTab(Translations.getText("settings.enemies"), enemiesPanel);
+//            enemiesPanel = new EnemiesPanel();
+//            addTab(Translations.getText("settings.enemies"), enemiesPanel);
 
         logicPanel = new LogicPanel();
-        addTab(Translations.getText("settings.logic"), logicPanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.logic"), logicPanel);
+        }
 
         appearancePanel = new AppearancePanel();
-        addTab(Translations.getText("settings.appearance"), appearancePanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.appearance"), appearancePanel);
+        }
 
         gameplayChangesPanel = new GameplayChangesPanel();
-        addTab(Translations.getText("settings.gameplay"), gameplayChangesPanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.gameplay"), gameplayChangesPanel);
+        }
 
         removedItemsPanel = new RemovedItemsPanel();
-        addTab(Translations.getText("settings.removal"), removedItemsPanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.removal"), removedItemsPanel);
+        }
 
         settingsTransportPanel = new SettingsTransportPanel(this);
-        addTab(Translations.getText("settings.share"), settingsTransportPanel);
+        if(!HolidaySettings.isFools2022Mode()) {
+            addTab(Translations.getText("settings.share"), settingsTransportPanel);
+        }
     }
 
     public void reloadSettings() {

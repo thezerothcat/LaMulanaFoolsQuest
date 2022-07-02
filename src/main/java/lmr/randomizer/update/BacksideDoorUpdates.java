@@ -52,17 +52,25 @@ public final class BacksideDoorUpdates {
             if(backsideDoorData.getDoorBoss() != null) {
                 if(backsideDoorData.getDoorBoss() == 9) {
                     AddObject.addKeyFairyDoorTimerAndSounds(gameObject.getObjectContainer());
-                    AddObject.addBacksideDoorKeyFairyPoint(gameObject);
+                    if(!(HolidaySettings.isFools2022Mode())) {
+                        AddObject.addBacksideDoorKeyFairyPoint(gameObject);
+                    }
                     AddObject.addAnimatedDoorCover(gameObject, FlagConstants.KEY_FAIRY_DOOR_UNLOCKED, false);
-                    AddObject.addBossNumberGraphicV2(gameObject, backsideDoorData.getDoorBoss(), null);
+                    if(!(HolidaySettings.isFools2022Mode())) {
+                        AddObject.addBossNumberGraphicV2(gameObject, backsideDoorData.getDoorBoss(), null);
+                    }
                 }
                 else {
                     int mirrorCoverFlag = getMirrorCoverFlag(backsideDoorData.getDoorBoss());
-                    AddObject.addAnimatedDoorTimerAndSound(gameObject.getObjectContainer(), FlagConstants.getBossFlag(backsideDoorData.getDoorBoss()), gateFlag);
+                    if(!HolidaySettings.isFools2022Mode()) {
+                        AddObject.addAnimatedDoorTimerAndSound(gameObject.getObjectContainer(), FlagConstants.getBossFlag(backsideDoorData.getDoorBoss()), gateFlag);
+                    }
                     AddObject.addMirrorCoverTimerAndSound(gameObject.getObjectContainer(), mirrorCoverFlag);
                     AddObject.addMirrorCoverGraphic(gameObject, mirrorCoverFlag);
                     AddObject.addAnimatedDoorCover(gameObject, gateFlag, true);
-                    AddObject.addBossNumberGraphicV2(gameObject, backsideDoorData.getDoorBoss(), mirrorCoverFlag);
+                    if(!HolidaySettings.isFools2022Mode() || backsideDoorData.getDoorName().equals("Door: B8")) {
+                        AddObject.addBossNumberGraphicV2(gameObject, backsideDoorData.getDoorBoss(), mirrorCoverFlag);
+                    }
                 }
             }
         }
@@ -71,7 +79,7 @@ public final class BacksideDoorUpdates {
     private static void replaceBacksideDoorFlags(GameObject gameObject, Integer bossNumber, Integer gateFlag, boolean motherCheck) {
         gameObject.getTestByteOperations().clear();
 
-        Integer bossFlag = FlagConstants.getBossFlag(bossNumber);
+        Integer bossFlag = bossNumber != null && !HolidaySettings.isFools2022Mode() ? FlagConstants.getBossFlag(bossNumber) : null;
         if(bossFlag != null) {
             gameObject.getTestByteOperations().add(new TestByteOperation(bossFlag, ByteOp.FLAG_EQUALS, bossNumber == 9 ? 1 : 3));
         }
@@ -300,6 +308,6 @@ public final class BacksideDoorUpdates {
     }
 
     private static boolean isDoorDisabledForEscape(String doorToReplace) {
-        return "Door: B5".equals(doorToReplace) || "Door: F9".equals(doorToReplace);
+        return !HolidaySettings.isFools2022Mode() && ("Door: B5".equals(doorToReplace) || "Door: F9".equals(doorToReplace));
     }
 }

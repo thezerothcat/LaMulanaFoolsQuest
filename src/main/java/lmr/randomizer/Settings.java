@@ -98,7 +98,7 @@ public final class Settings {
     private BossDifficulty bossDifficulty;
     private ShopRandomizationEnum shopRandomization;
 
-    public static byte[] goddessMsdBytes; // A way around doing msd edits properly.
+    public static byte[] holidayModMsdBytes; // A way around doing msd edits properly.
 
     private Settings() {
         startingSeed = new Random().nextInt(Integer.MAX_VALUE);
@@ -209,11 +209,19 @@ public final class Settings {
     }
 
     public static long getStartingSeed() {
+        if(HolidaySettings.isFools2022Mode()) {
+            return 2022;
+        }
         return singleton.startingSeed;
     }
 
     public static void setStartingSeed(int startingSeed) {
-        singleton.startingSeed = startingSeed;
+        if(HolidaySettings.isFools2022Mode()) {
+            singleton.startingSeed = 2022;
+        }
+        else {
+            singleton.startingSeed = startingSeed;
+        }
     }
 
     public static String getLaMulanaBaseDir() {
@@ -969,8 +977,8 @@ public final class Settings {
     }
 
     public static boolean isGenerationComplete(int attemptNumber) {
-        return singleton.skipValidation != null
-                && (singleton.skipValidation <= attemptNumber || singleton.skipValidation.equals(-1));
+        return HolidaySettings.isFools2022Mode() || (singleton.skipValidation != null
+                && (singleton.skipValidation <= attemptNumber || singleton.skipValidation.equals(-1))); // todo: better answer?
     }
 
     public static boolean isDetailedLoggingAttempt(Integer attemptNumber) {
@@ -979,7 +987,7 @@ public final class Settings {
     }
 
     public static boolean isSkipValidation(int attemptNumber) {
-        return singleton.skipValidation != null && attemptNumber < singleton.skipValidation;
+        return HolidaySettings.isFools2022Mode() || singleton.skipValidation != null && attemptNumber < singleton.skipValidation; // todo: better answer?
     }
 
     public static void setSkipValidation(int skipValidationAttemptNumber) {
