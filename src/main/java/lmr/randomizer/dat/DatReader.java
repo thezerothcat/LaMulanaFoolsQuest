@@ -201,7 +201,8 @@ public final class DatReader {
         dataIndex += listEntry.getSize() / 2;
         scannableBlock.getBlockContents().add(listEntry);
 
-        if(scannableBlock.getSlate() > 0) {
+        if(scannableBlock.getSlate() > 0
+                || (blockIndex == BlockConstants.Tablet_Inferno_TuneOfThineOcarina && DataFromFile.isLaMulanaVersionBefore("1.3"))) {
             dataInputStream.readShort(); // 0x000a
             dataIndex += 2;
             listEntry.setIncludeEndRecordIndicator(true);

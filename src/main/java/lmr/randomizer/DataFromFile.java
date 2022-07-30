@@ -109,6 +109,8 @@ public final class DataFromFile {
     private static List<String> winRequirements;
     private static List<String> chestOnlyLocations;
 
+    private static String laMulanaVersion;
+
     private static List<Integer> removedTabletGlowFlags;
 
     private static CustomPlacementData customPlacementData;
@@ -544,6 +546,22 @@ public final class DataFromFile {
             allCoinChests = FileUtils.getList("all/coin_chests.txt");
         }
         return allCoinChests;
+    }
+
+    public static boolean isLaMulanaVersionBefore(String expectedVersion) {
+        if (expectedVersion.equals(laMulanaVersion)) {
+            return false;
+        }
+        int actualNumber = Integer.parseInt("" + laMulanaVersion.charAt(2));
+        int expectedNumber = Integer.parseInt("" + expectedVersion.charAt(2));
+        if (actualNumber < expectedNumber) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void setLaMulanaVersion(String version) {
+        laMulanaVersion = version;
     }
 
     public static List<Integer> getRemovedTabletGlowFlags() {
