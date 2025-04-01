@@ -919,27 +919,6 @@ public class Main {
                 }
 
                 GraphicsFileUpdater.updateGraphicsFiles(); // Always want to update graphics files, for backup Shrine door and possibly other things.
-                if(HolidaySettings.isHalloween2019Mode()) {
-                    if(!GraphicsFileUpdater.updateGraphicsFilesForHalloween2019(Settings.getGraphicsPack())) {
-                        JOptionPane.showMessageDialog(f,
-                                Translations.getText("Unable to create Halloween graphics"),
-                                "Randomizer error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if(HolidaySettings.isHalloween2021Mode()) {
-                    if(!GraphicsFileUpdater.updateGraphicsFilesForHalloween2021(Settings.getGraphicsPack())) {
-                        JOptionPane.showMessageDialog(f,
-                                Translations.getText("Unable to create Halloween 2021 graphics"),
-                                "Randomizer error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if(HolidaySettings.isFools2020Mode()) {
-                    if(!GraphicsFileUpdater.updateGraphicsFilesForFools2020(Settings.getGraphicsPack())) {
-                        JOptionPane.showMessageDialog(f,
-                                Translations.getText("Unable to create Fools 2020 graphics"),
-                                "Randomizer error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
                 if(HolidaySettings.isFools2022Mode()) {
                     if(!GraphicsFileUpdater.updateGraphicsFilesForFools2022(Settings.getGraphicsPack())) {
                         JOptionPane.showMessageDialog(f,

@@ -1,6 +1,7 @@
 package lmr.randomizer.update;
 
 import lmr.randomizer.DataFromFile;
+import lmr.randomizer.HolidaySettings;
 import lmr.randomizer.Settings;
 import lmr.randomizer.rcd.object.*;
 import lmr.randomizer.util.BlockConstants;
@@ -144,7 +145,8 @@ public class ScannableUpdates {
             WriteByteOperation writeByteOperation = scannable.getWriteByteOperations().get(0);
             if(writeByteOperation.getValue() == 1
                     && ByteOp.ASSIGN_FLAG.equals(writeByteOperation.getOp())
-                    && DataFromFile.getRemovedTabletGlowFlags().contains(writeByteOperation.getIndex())) {
+                    && (DataFromFile.getRemovedTabletGlowFlags().contains(writeByteOperation.getIndex())
+                    || HolidaySettings.isPreserveCustomTabletGlow() && DataFromFile.getCustomTabletGlowFlags().contains(writeByteOperation.getIndex()))) {
                 scannable.removeUpdate(new WriteByteOperation(writeByteOperation.getIndex(), ByteOp.ASSIGN_FLAG, 1));
             }
         }

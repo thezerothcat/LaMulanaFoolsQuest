@@ -216,5 +216,7 @@ public enum CustomBlockEnum {
     Fools2022_GraveyardSnapshotsScan,
     Fools2022_GraveyardSnapshotsScanFail,
     Fools2022_PreEscape,
-    Fools2022_Yiegah_Alt;
+    Fools2022_Yiegah_Alt,
+    Fools2022_Tablet_DimensionalExit_Alt,
+    Fools2022_Xelpud_Music;
 }

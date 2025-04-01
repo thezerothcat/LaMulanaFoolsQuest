@@ -66,8 +66,53 @@ public class DatFileData {
     public Block getXmailerConversationBlock() {
         return datFileEntries.get(BlockConstants.ItemConversationXmailer);
     }
+    public Block getXelpudHeldItemDjedPillarBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_DjedPillar);
+    }
+    public Block getXelpudHeldItemMiniDollBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_MiniDoll);
+    }
+    public Block getXelpudHeldItemMagatamaJewelBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_MagatamaJewel);
+    }
+    public Block getXelpudHeldItemCogOfTheSoulBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_CogOfTheSoul);
+    }
+    public Block getXelpudHeldItemLampOfTimeBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_LampOfTime);
+    }
+    public Block getXelpudHeldItemPochetteKeyBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_PochetteKey);
+    }
+    public Block getXelpudHeldItemDragonBoneBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_DragonBone);
+    }
+    public Block getXelpudHeldItemCrystalSkullBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_CrystalSkull);
+    }
+    public Block getXelpudHeldItemVesselBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_Vessel);
+    }
     public Block getXelpudHeldItemPepperBlock() {
         return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_Pepper);
+    }
+    public Block getXelpudHeldItemWomanStatueBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_WomanStatue);
+    }
+    public Block getXelpudHeldItemMaternityStatueBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_MaternityStatue);
+    }
+    public Block getXelpudHeldItemKeyOfEternityBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_KeyOfEternity);
+    }
+    public Block getXelpudHeldItemSerpentStaffBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_SerpentStaff);
+    }
+    public Block getXelpudHeldItemHandScannerBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_HandScanner);
+    }
+    public Block getXelpudHeldItemMulanaTalismanBlock() {
+        return datFileEntries.get(BlockConstants.XelpudHeldItemConversation_MulanaTalisman);
     }
     public Block getXelpudTalismanConversationBlock() {
         return datFileEntries.get(BlockConstants.XelpudTalismanConversation);

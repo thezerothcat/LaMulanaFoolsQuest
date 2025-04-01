@@ -51,6 +51,7 @@ package lmr.randomizer.rcd.object;
  */
 public class GraphicsTextureDraw extends GameObject {
     public static int EntryEffect_FadeIn = 1;
+    public static int EntryEffect_Animate = 2;
 
     public static int ExitEffect_FadeOut = 1;
     public static int ExitEffect_LargeBreak = 3;

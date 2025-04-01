@@ -112,6 +112,7 @@ public final class DataFromFile {
     private static String laMulanaVersion;
 
     private static List<Integer> removedTabletGlowFlags;
+    private static List<Integer> customTabletGlowFlags;
 
     private static CustomPlacementData customPlacementData;
 
@@ -586,6 +587,23 @@ public final class DataFromFile {
             tabletGlowFlags.removeAll(FlagConstants.TRANSLATION_TABLET_GLOW_FLAGS);
         }
         return customTabletExists ? tabletGlowFlags : new ArrayList<>(0);
+    }
+
+    public static List<Integer> getCustomTabletGlowFlags() {
+        if(customTabletGlowFlags == null ) {
+            customTabletGlowFlags = getFlagsForCustomTabletGlow();
+        }
+        return customTabletGlowFlags;
+    }
+
+    private static List<Integer> getFlagsForCustomTabletGlow() {
+        List<Integer> tabletGlowFlags = new ArrayList<>();
+        for(Integer tabletGlowFlag : FlagConstants.CUSTOMIZABLE_TABLET_GLOW_FLAGS) {
+            if(hasCustomTablet(tabletGlowFlag)) {
+                tabletGlowFlags.add(tabletGlowFlag);
+            }
+        }
+        return tabletGlowFlags;
     }
 
     private static boolean hasCustomTablet(int tabletGlowFlag) {

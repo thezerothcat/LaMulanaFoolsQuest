@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
  * Created by thezerothcat on 7/10/2017.
  */
 public class FileUtils {
-    public static final String VERSION = "2.0.1";
+    public static final String VERSION = "2.0.2";
 
     private static BufferedWriter logWriter;
     private static final Map<String, String> KNOWN_RCD_FILE_HASHES = new HashMap<>();
@@ -984,15 +984,6 @@ public class FileUtils {
             }
 
             GraphicsFileUpdater.updateGraphicsFiles();
-            if(HolidaySettings.isHalloween2019Mode()) {
-                GraphicsFileUpdater.updateGraphicsFilesForHalloween2019(Settings.getGraphicsPack());
-            }
-            if(HolidaySettings.isHalloween2021Mode()) {
-                GraphicsFileUpdater.updateGraphicsFilesForHalloween2021(Settings.getGraphicsPack());
-            }
-            if(HolidaySettings.isFools2020Mode()) {
-                GraphicsFileUpdater.updateGraphicsFilesForFools2020(Settings.getGraphicsPack());
-            }
             if(HolidaySettings.isFools2022Mode()) {
                 GraphicsFileUpdater.updateGraphicsFilesForFools2022(Settings.getGraphicsPack());
             }

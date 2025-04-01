@@ -1,5 +1,6 @@
 package lmr.randomizer.rcd.updater;
 
+import lmr.randomizer.HolidaySettings;
 import lmr.randomizer.Settings;
 import lmr.randomizer.dat.DatFileData;
 import lmr.randomizer.graphics.GraphicsFileData;
@@ -869,8 +870,13 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 }
             }
         }
-        if (screen.getZoneIndex() == ZoneConstants.ILLUSION && screen.getRoomIndex() == 5 && screen.getScreenIndex() == 0) {
-            hitbox.setBreakableBy(Hitbox.AnyWeapon);
+        if (screen.getZoneIndex() == ZoneConstants.ILLUSION) {
+            if (screen.getRoomIndex() == 4 && screen.getScreenIndex() == 0) {
+                hitbox.setDirection(Hitbox.AnyDirection);
+            }
+            if (screen.getRoomIndex() == 5 && screen.getScreenIndex() == 0) {
+                hitbox.setBreakableBy(Hitbox.AnyWeapon);
+            }
         }
         if (screen.getZoneIndex() == ZoneConstants.GODDESS && screen.getRoomIndex() == 4 && screen.getScreenIndex() == 1) {
             return false;
@@ -893,9 +899,16 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new WriteByteOperation(FlagConstants.SCREEN_FLAG_C, ByteOp.ASSIGN_FLAG, 1));
             }
         }
-        if (screen.getZoneIndex() == ZoneConstants.BIRTH_SKANDA && screen.getRoomIndex() == 2 && screen.getScreenIndex() == 0) {
-            if(hitbox.hasUpdate(new WriteByteOperation(FlagConstants.BIRTH_ASURA_BEHEADED, ByteOp.ASSIGN_FLAG, 1))) {
-                return false;
+        if (screen.getZoneIndex() == ZoneConstants.BIRTH_SKANDA) {
+            if (screen.getRoomIndex() == 2 && screen.getScreenIndex() == 0) {
+                if(hitbox.hasUpdate(new WriteByteOperation(FlagConstants.BIRTH_ASURA_BEHEADED, ByteOp.ASSIGN_FLAG, 1))) {
+                    return false;
+                }
+            }
+            if (screen.getRoomIndex() == 3 && screen.getScreenIndex() == 0) {
+                if(hitbox.hasUpdate(new WriteByteOperation(FlagConstants.BIRTH_WALL_DIMENSIONAL_KEY, ByteOp.ASSIGN_FLAG, 1))) {
+                    hitbox.setDirection(Hitbox.AnyDirection);
+                }
             }
         }
         if (screen.getZoneIndex() == ZoneConstants.SHRINE_BACK) {
@@ -1727,6 +1740,22 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                                 new WriteByteOperation(FlagConstants.MAIL_15, ByteOp.ASSIGN_FLAG, 1),
                                 new WriteByteOperation(FlagConstants.MAIL_COUNT, ByteOp.ADD_FLAG, 1)));
             }
+            if(roomIndex == 2 && screenIndex == 1) {
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(
+                                new TestByteOperation(FlagConstants.WF_SOFTWARE_EMUSIC, ByteOp.FLAG_GT, 0),
+                                new TestByteOperation(FlagConstants.WF_SOFTWARE_BEOLAMU, ByteOp.FLAG_EQUALS, 0),
+                                new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_XELPUD_MUSIC_1, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(
+                                new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_XELPUD_MUSIC_1, ByteOp.ASSIGN_FLAG, 1)));
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(
+                                new TestByteOperation(FlagConstants.WF_SOFTWARE_BEOLAMU, ByteOp.FLAG_GT, 0),
+                                new TestByteOperation(FlagConstants.WF_SOFTWARE_EMUSIC, ByteOp.FLAG_EQUALS, 0),
+                                new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_XELPUD_MUSIC_1, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(
+                                new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_XELPUD_MUSIC_1, ByteOp.ASSIGN_FLAG, 1)));
+            }
             if(roomIndex == 4 && screenIndex == 0) {
                 AddObject.addMantraDetector(screen, WAR_RAP)
                         .addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_SOUND_CANYON, ByteOp.FLAG_EQUALS, 0))
@@ -2204,6 +2233,11 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_MANTRAS_ENABLED, ByteOp.FLAG_EQUALS, 2)));
             }
             if(roomIndex == 5 && screenIndex == 1) {
+                AddObject.addMantraDetector(screen, ASCENSION)
+                        .addTests(new TestByteOperation(FlagConstants.SCREEN_FLAG_2C, ByteOp.FLAG_EQUALS, 0))
+                        .addUpdates(new WriteByteOperation(FlagConstants.SCREEN_FLAG_2C, ByteOp.ASSIGN_FLAG, 1));
+            }
+            if(roomIndex == 7 && screenIndex == 0) {
                 AddObject.addMantraDetector(screen, ASCENSION)
                         .addTests(new TestByteOperation(FlagConstants.SCREEN_FLAG_2C, ByteOp.FLAG_EQUALS, 0))
                         .addUpdates(new WriteByteOperation(FlagConstants.SCREEN_FLAG_2C, ByteOp.ASSIGN_FLAG, 1));
@@ -2972,20 +3006,14 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                                 new WriteByteOperation(FlagConstants.WF_SOFTWARE_READER, ByteOp.ASSIGN_FLAG, 2)));
             }
             if(roomIndex == 3 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 220, 160);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1)));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 220, 160);
             }
             if(roomIndex == 4 && screenIndex == 0) {
                 addSurfacePlatforming(screen);
             }
             if(roomIndex == 5 && screenIndex == 1) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 320, 880);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.SURFACE_UNDERPATH_VISIBLE, ByteOp.FLAG_GT, 0),
-                        new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 320, 880).addTests(
+                        new TestByteOperation(FlagConstants.SURFACE_UNDERPATH_VISIBLE, ByteOp.FLAG_GT, 0));
             }
             if(roomIndex == 8 && screenIndex == 0) {
                 // Door randomization leaves off the mirror cover graphic when the rest of the door gets deleted, but we need that active.
@@ -2994,10 +3022,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
         }
         if(zoneIndex == ZoneConstants.GUIDANCE) {
             if(roomIndex == 1 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 60, 160);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 60, 160);
             }
             if(roomIndex == 3 && screenIndex == 0) {
                 AddObject.addPressurePlate(screen, 140, 280)
@@ -3077,18 +3102,12 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 AddObject.addExtendingSpikes(screen, 320, 360, FlagConstants.SCREEN_FLAG_8);
             }
             if(roomIndex == 9 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 300, 400);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 300, 400);
             }
         }
         if(zoneIndex == ZoneConstants.SUN) {
             if(roomIndex == 4 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 260, 160);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 260, 160);
             }
             if(roomIndex == 4 && screenIndex == 2) {
                 AddObject.addUseItemDetector(screen, 1660, 220, 13, 7, "Mini Doll")
@@ -3203,10 +3222,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.INFERNO_PUZZLE_FLARE_GUN, ByteOp.FLAG_GTEQ, 2));
             }
             if(roomIndex == 6 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 300, 160);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 300, 160);
             }
             if(roomIndex == 9 && screenIndex == 0) {
                 addInfernoSpikesPlatformingPuzzleScreen1(screen);
@@ -3323,10 +3339,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 addDeathField(screen, 1360, 300, -1, 240, 60);
             }
             if(roomIndex == 5 && screenIndex == 3) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 2500, 240);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 2500, 240);
             }
         }
         if(zoneIndex == ZoneConstants.SHRINE_FRONT) {
@@ -3339,10 +3352,32 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         .addUpdates(new WriteByteOperation(FlagConstants.ROOM_FLAG_37, ByteOp.ASSIGN_FLAG, 1));
             }
             if(roomIndex == 5 && screenIndex == 1) {
+                addFairyPoint(screen, 920, 560);
                 addJumpPointObjects(screen, 940, 200, 2, true, FlagConstants.SCREEN_FLAG_2C);
+            }
+            if(roomIndex == 7 && screenIndex == 0) {
+                addJumpPointObjects(screen, 560, 440, 1, false, FlagConstants.SCREEN_FLAG_2C);
+
+                GraphicsTextureDraw platform = new GraphicsTextureDraw(screen, 560, 120);
+
+                platform.setLayer(0);
+                platform.setImageFile("map*_1.png");
+                platform.setImageX(220);
+                platform.setImageY(40);
+                platform.setImageWidth(40);
+                platform.setImageHeight(20);
+                platform.setAnimation(0, 1, 0, 0);
+                platform.setCollision(HitTile.Solid);
+                platform.setRGBAMax(0, 0, 0, 255);
+                platform.setArg23(1);
+
+                screen.getObjects().add(platform);
             }
             if(roomIndex == 8 && screenIndex == 0) {
                 addJumpPointObjects(screen, 580, 280, 2, true, FlagConstants.SCREEN_FLAG_2C);
+            }
+            if(roomIndex == 8 && screenIndex == 1) {
+                addFairyPoint(screen, 580, 560);
             }
         }
         if (screen.getZoneIndex() == ZoneConstants.ILLUSION) {
@@ -3360,6 +3395,8 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 addIllusionFloatingItem(screen, 1440, 160, ItemConstants.KNIFE, 0, 1);
                 addIllusionFloatingItem(screen, 1560, 240, ItemConstants.ANGEL_SHIELD, 1, 2);
                 addIllusionFloatingItem(screen, 1720, 160, ItemConstants.SPAULDER, 2, 3);
+
+                addFairyPoint(screen, 1420, 80);
             }
             if(roomIndex == 8 && screenIndex == 0) {
                 AddObject.addLemezaDetector(screen, 20, 300, 21, 8,
@@ -3383,10 +3420,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 addMantraRecitedIndicator(screen, zoneIndex, FlagConstants.CUSTOM_MANTRAS_DEATH, 1020, 20, 3);
             }
             if(roomIndex == 2 && screenIndex == 1) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 980, 240);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 980, 240);
             }
         }
         if(zoneIndex == ZoneConstants.MOONLIGHT) {
@@ -3443,10 +3477,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 AddObject.addOneWayDoor(screen, 620, 220, OneWayDoor.EXIT_LEFT);
             }
             if(roomIndex == 9 && screenIndex == 1) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 640, 80);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 640, 80);
             }
         }
         if(zoneIndex == ZoneConstants.GODDESS) {
@@ -3505,10 +3536,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 addCrossOfLight(screen, 920, 100, -1);
             }
             if(roomIndex == 4 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 300, 160);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 300, 160);
             }
             if(roomIndex == 5 && screenIndex == 0) {
                 addMantraRecitedIndicator(screen, zoneIndex, FlagConstants.CUSTOM_MANTRAS_NOTHING, 60, 280, 3);
@@ -3551,6 +3579,9 @@ public class Fools2022RcdUpdater extends RcdUpdater {
 //                obj.addTests(new TestByteOperation(FlagConstants.SCREEN_FLAG_10, ByteOp.FLAG_EQUALS, 1));
 //                screen.getObjects().add(obj);
 //            }
+            if(roomIndex == 0 && screenIndex == 1) {
+                addFairyPoint(screen, 300, 240);
+            }
             if(roomIndex == 2 && screenIndex == 0) {
                 GraphicsTextureDraw graphicsTextureDraw = new GraphicsTextureDraw(screen, 220, 360);
                 graphicsTextureDraw.setLayer(-1);
@@ -3578,6 +3609,9 @@ public class Fools2022RcdUpdater extends RcdUpdater {
             }
         }
         if(zoneIndex == ZoneConstants.BIRTH_SKANDA) {
+            if(roomIndex == 2 && screenIndex == 0) {
+                addFairyPoint(screen, 120, 240);
+            }
             if(roomIndex == 4 && screenIndex == 0) {
                 addMantraRecitedIndicator(screen, zoneIndex, FlagConstants.CUSTOM_MANTRAS_LIFE, 280, 120, 0);
             }
@@ -3587,34 +3621,19 @@ public class Fools2022RcdUpdater extends RcdUpdater {
         }
         if(zoneIndex == ZoneConstants.DIMENSIONAL) {
             if(roomIndex == 0 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 300, 400);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 300, 400);
             }
             if(roomIndex == 1 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 380, 240);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 380, 240);
             }
             if(roomIndex == 4 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 260, 80);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 260, 80);
             }
             if(roomIndex == 5 && screenIndex == 1) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 180, 720);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 180, 720);
             }
             if(roomIndex == 8 && screenIndex == 0) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 100, 240);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 100, 240);
             }
             if(roomIndex == 9 && screenIndex == 0) {
                 addCrossOfLight(screen, 280, 40, -1);
@@ -3627,11 +3646,11 @@ public class Fools2022RcdUpdater extends RcdUpdater {
 //            if(roomIndex == 3 && screenIndex == 0) {
 //                // Mother ankh room
 //            }
+            if(roomIndex == 5 && screenIndex == 1) {
+                addFairyPoint(screen, 920, 560);
+            }
             if(roomIndex == 8 && screenIndex == 1) {
-                FairyPoint fairyPoint = new FairyPoint(screen, 580, 560);
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1)));
-                screen.getObjects().add(fairyPoint);
+                addFairyPoint(screen, 580, 560);
             }
         }
         if(zoneIndex == ZoneConstants.RETRO_MAUSOLEUM) {
@@ -3650,16 +3669,10 @@ public class Fools2022RcdUpdater extends RcdUpdater {
             }
         }
         if(zoneIndex == ZoneConstants.RETRO_GUIDANCE && roomIndex == 4 && screenIndex == 0) {
-            FairyPoint fairyPoint = new FairyPoint(screen, 160, 320);
-            fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-            fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1));
-            screen.getObjects().add(fairyPoint);
+            addFairyPoint(screen, 160, 320);
         }
         if(zoneIndex == ZoneConstants.HT_2 && roomIndex == 1 && screenIndex == 0) {
-            FairyPoint fairyPoint = new FairyPoint(screen, 600, 400);
-            fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-            fairyPoint.addTests(new TestByteOperation(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1)));
-            screen.getObjects().add(fairyPoint);
+            addFairyPoint(screen, 600, 400);
         }
         if(zoneIndex == ZoneConstants.BURNING_CAVERN && roomIndex == 0 && screenIndex == 0) {
             addTablet(screen, 20, 80, -1, getCustomBlockIndex(CustomBlockEnum.Fools2022_Tablet_ToilsForNaught), FlagConstants.CUSTOM_FOOLS2022_TOILS_FOR_NAUGHT_BURNING_CAVERN, null);
@@ -4006,10 +4019,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 .addUpdates(new WriteByteOperation(FlagConstants.ROOM_FLAG_32, ByteOp.ASSIGN_FLAG, 1));
 
         Screen htBoss = rcdFileData.getScreen(ZoneConstants.HT_1, 22, 1);
-        FairyPoint fairyPoint = new FairyPoint(htBoss, 940, 400);
-        fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-        fairyPoint.addTests(new TestByteOperation(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1)));
-        htBoss.getObjects().add(fairyPoint);
+        addFairyPoint(htBoss, 940, 400);
         for(GameObject animation : htBoss.getObjectsById(ObjectIdConstants.Animation)) {
             if(animation.getArgs().get(7) == 100) {
                 animation.getArgs().set(7, (short)0);
@@ -4068,10 +4078,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 Arrays.asList(
                         new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_HT_1, ByteOp.FLAG_EQUALS, 0)),
                 Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_HT_1, ByteOp.ASSIGN_FLAG, 1)));
-        fairyPoint = new FairyPoint(htBombRoom, 500, 640);
-        fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-        fairyPoint.addTests(new TestByteOperation(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1)));
-        htBombRoom.getObjects().add(fairyPoint);
+        addFairyPoint(htBombRoom, 500, 640);
         AddObject.addWarpDoor(htBombRoom, 260, 560, 23, 0, 0, 140, 400, new ArrayList<>(0));
         addHTDoorGraphic(htBombRoom, 260, 560);
 
@@ -4115,6 +4122,141 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 Arrays.asList(
                         new WriteByteOperation(FlagConstants.MAIL_19, ByteOp.ASSIGN_FLAG, 1),
                         new WriteByteOperation(FlagConstants.MAIL_COUNT, ByteOp.ADD_FLAG, 1)));
+    }
+
+    private void updateForTabletFlip() {
+        Screen tabletFlipScreen = rcdFileData.getScreen(ZoneConstants.BIRTH_SKANDA, 0, 0);
+        for(GameObject scannableObj : tabletFlipScreen.getObjectsById(ObjectIdConstants.Scannable)) {
+            Scannable scannable = (Scannable)scannableObj;
+            if(scannable.getTextBlock() == BlockConstants.Tablet_Birth_ClayDollsBecomeHuman) {
+                scannable.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 0));
+                if(HolidaySettings.isPreserveCustomTabletGlow()) {
+                    // Re-add the removed flag update.
+                    scannable.addUpdates(new WriteByteOperation(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_CLAY_DOLLS_BECOME_HUMAN, ByteOp.ASSIGN_FLAG, 1));
+                }
+            }
+        }
+        for(GameObject graphicsObj : tabletFlipScreen.getObjectsById(ObjectIdConstants.GraphicsTextureDraw)) {
+            if(graphicsObj.getX() == 40 && graphicsObj.getY() == 80) {
+                if(HolidaySettings.isPreserveCustomTabletGlow()) {
+                    graphicsObj.removeTest(new TestByteOperation(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_CLAY_DOLLS_BECOME_HUMAN, ByteOp.FLAG_EQUALS, 0));
+                }
+                graphicsObj.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 0));
+            }
+        }
+
+        Scannable newTablet = new Scannable(tabletFlipScreen, 40, 80);
+        newTablet.setTextBlock(getCustomBlockIndex(CustomBlockEnum.Fools2022_Tablet_DimensionalExit_Alt));
+        newTablet.setArg1(0);
+        newTablet.setArg2(0);
+        newTablet.setArg3(1);
+        newTablet.setArg4(1);
+        newTablet.setArg5(1);
+        newTablet.setArg6(1);
+        newTablet.setArg7(1);
+        newTablet.setArg8(1);
+        newTablet.setArg9(0);
+        newTablet.setDimensions(40, 40);
+        newTablet.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_GT, 1));
+        if(!HolidaySettings.isPreserveCustomTabletGlow()) {
+            newTablet.addUpdates(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_ALT_TABLET_GLOW, ByteOp.ASSIGN_FLAG, 1));
+        }
+        tabletFlipScreen.getObjects().add(newTablet);
+
+        GraphicsTextureDraw tabletGlowGraphic = new GraphicsTextureDraw(tabletFlipScreen, 40, 80);
+        tabletGlowGraphic.setLayer(0);
+        tabletGlowGraphic.setImageFile(GraphicsTextureDraw.ImageFile_00item_alt);
+
+        tabletGlowGraphic.setImageX(820);
+        tabletGlowGraphic.setImageY(560);
+        tabletGlowGraphic.setImageWidth(40);
+        tabletGlowGraphic.setImageHeight(40);
+
+        tabletGlowGraphic.setAnimation(1, 1, 4, 0);
+        tabletGlowGraphic.setExitEffect(GraphicsTextureDraw.ExitEffect_FadeOut);
+        tabletGlowGraphic.setCycleColors(true);
+        tabletGlowGraphic.setCollision(HitTile.Air);
+        tabletGlowGraphic.setAlphaPerFrame(0);
+        tabletGlowGraphic.setMaxAlpha(255);
+        tabletGlowGraphic.setRedPerFrame(20);
+        tabletGlowGraphic.setMaxRed(20);
+        tabletGlowGraphic.setGreenPerFrame(0);
+        tabletGlowGraphic.setMaxGreen(0);
+        tabletGlowGraphic.setBluePerFrame(0);
+        tabletGlowGraphic.setMaxBlue(0);
+        tabletGlowGraphic.setBlendMode(1);
+        tabletGlowGraphic.setArg23(0);
+        tabletGlowGraphic.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 2));
+        tabletGlowGraphic.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_ALT_TABLET_GLOW, ByteOp.FLAG_EQUALS, 0));
+        tabletFlipScreen.getObjects().add(tabletGlowGraphic);
+
+        GraphicsTextureDraw tabletFlipAnimation = new GraphicsTextureDraw(tabletFlipScreen, 40, 80);
+        tabletFlipAnimation.setLayer(-1);
+        tabletFlipAnimation.setImageFile(GraphicsTextureDraw.ImageFile_01effect);
+
+        tabletFlipAnimation.setImageX(417);
+        tabletFlipAnimation.setImageY(850);
+        tabletFlipAnimation.setImageWidth(40);
+        tabletFlipAnimation.setImageHeight(40);
+
+        tabletFlipAnimation.setAnimation(1, 6, 6, 1);
+        tabletFlipAnimation.setEntryEffect(GraphicsTextureDraw.EntryEffect_Animate);
+        tabletFlipAnimation.setCycleColors(false);
+        tabletFlipAnimation.setCollision(HitTile.Air);
+        tabletFlipAnimation.setAlphaPerFrame(0);
+        tabletFlipAnimation.setMaxAlpha(255);
+        tabletFlipAnimation.setRedPerFrame(0);
+        tabletFlipAnimation.setMaxRed(0);
+        tabletFlipAnimation.setGreenPerFrame(0);
+        tabletFlipAnimation.setMaxGreen(0);
+        tabletFlipAnimation.setBluePerFrame(0);
+        tabletFlipAnimation.setMaxBlue(0);
+        tabletFlipAnimation.setBlendMode(0);
+        tabletFlipAnimation.setArg23(1);
+        tabletFlipAnimation.addTests(new TestByteOperation(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_CLAY_DOLLS_BECOME_HUMAN, ByteOp.FLAG_EQUALS, 1));
+        tabletFlipAnimation.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BOSSES_DEAD, ByteOp.FLAG_GT, 0));
+        tabletFlipAnimation.addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 1));
+        tabletFlipAnimation.addUpdates(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.ASSIGN_FLAG, 2));
+        tabletFlipScreen.getObjects().add(tabletFlipAnimation);
+
+        SoundEffect tabletFlipSoundEffect = new SoundEffect(tabletFlipScreen);
+        tabletFlipSoundEffect.setSoundEffect(41);
+        tabletFlipSoundEffect.setVolume(127, 127, 0);
+        tabletFlipSoundEffect.setBalance(64, 64, 0);
+        tabletFlipSoundEffect.setPitch(0, 30, 0);
+        tabletFlipSoundEffect.setPriority(15);
+        tabletFlipSoundEffect.setRumbleStrength(10);
+
+        tabletFlipSoundEffect.getTestByteOperations().add(new TestByteOperation(FlagConstants.SCREEN_FLAG_F, ByteOp.FLAG_EQUALS, 1));
+
+        tabletFlipScreen.getObjects().add(0, tabletFlipSoundEffect);
+
+        // Initiate tablet flip
+        AddObject.addFramesTimer(tabletFlipScreen, 0,
+                Arrays.asList(
+                        new TestByteOperation(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_CLAY_DOLLS_BECOME_HUMAN, ByteOp.FLAG_EQUALS, 1),
+                        new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BOSSES_DEAD, ByteOp.FLAG_GT, 0),
+                        new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 0)),
+                Arrays.asList(
+                        new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.ASSIGN_FLAG, 1),
+                        new WriteByteOperation(FlagConstants.SCREEN_FLAG_F, ByteOp.ASSIGN_FLAG, 1)));
+
+        // Skip tablet flip
+        AddObject.addFramesTimer(tabletFlipScreen, 0,
+                Arrays.asList(
+                        new TestByteOperation(FlagConstants.TABLET_GLOW_BIRTH_SKANDA_CLAY_DOLLS_BECOME_HUMAN, ByteOp.FLAG_EQUALS, 0),
+                        new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BOSSES_DEAD, ByteOp.FLAG_GT, 0),
+                        new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 0)),
+                Arrays.asList(
+                        new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.ASSIGN_FLAG, 2)));
+
+        // End tablet flip
+        AddObject.addFramesTimer(tabletFlipScreen, 6,
+                Arrays.asList(
+                        new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.FLAG_EQUALS, 1)),
+                Arrays.asList(
+                        new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_TABLET_FLIP, ByteOp.ASSIGN_FLAG, 2)));
+
     }
 
     private void updateForPacifistTracking() {
@@ -5566,6 +5708,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
         fixGateOfTimeAndNightSurfaceDoors();
         updateTransitionGates();
         updateForHT();
+        updateForTabletFlip();
         updateForPacifistTracking();
         updateForPacifist();
         AddToAllScreens addCrusherGraphic = new AddToAllScreens() {
@@ -5870,12 +6013,9 @@ public class Fools2022RcdUpdater extends RcdUpdater {
         }
         for(GameObject gameObject : rcdFileData.getObjectsById(ObjectIdConstants.Ankh)) {
             if(!gameObject.hasTest(new TestByteOperation(FlagConstants.HARDMODE, ByteOp.FLAG_EQUALS, 2))) {
-                FairyPoint fairyPoint = new FairyPoint(gameObject.getObjectContainer(), gameObject.getX(), gameObject.getY());
-                fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
-                fairyPoint.addTests(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1),
+                addFairyPoint(gameObject.getObjectContainer(), gameObject.getX(), gameObject.getY()).addTests(
                         new TestByteOperation(gameObject.getWriteByteOperations().get(0).getIndex(), ByteOp.FLAG_GTEQ, 0),
                         new TestByteOperation(gameObject.getWriteByteOperations().get(0).getIndex(), ByteOp.FLAG_LTEQ, 2));
-                gameObject.getObjectContainer().getObjects().add(fairyPoint);
             }
         }
     }
@@ -8168,6 +8308,14 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.WF_PHILOSOPHERS_OCARINA, ByteOp.FLAG_EQUALS, 0))
                 .addUpdates(new WriteByteOperation(FlagConstants.WF_PHILOSOPHERS_OCARINA, ByteOp.ASSIGN_FLAG, 2),
                         new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_SOUND_CANYON, ByteOp.ASSIGN_FLAG, 2));
+    }
+
+    private FairyPoint addFairyPoint(ObjectContainer screen, int x, int y) {
+        FairyPoint fairyPoint = new FairyPoint(screen, x, y);
+        fairyPoint.setFairyType(FairyPoint.HEALTH_FAIRY);
+        fairyPoint.addTests(new TestByteOperation(new TestByteOperation(FlagConstants.FAIRY_POINTS_ACTIVE, ByteOp.FLAG_EQUALS, 1)));
+        screen.getObjects().add(fairyPoint);
+        return fairyPoint;
     }
 
     private static GraphicsTextureDraw addCrossOfLight(Screen screen, int x, int y, int layer) {

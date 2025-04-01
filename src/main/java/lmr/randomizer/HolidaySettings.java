@@ -8,11 +8,13 @@ public final class HolidaySettings {
     private boolean updatedVersion;
     private boolean includeHellTempleNPCs;
     private boolean includeOptionalContent;
+    private boolean preserveCustomTabletGlow;
 
     private HolidaySettings() {
         updatedVersion = true;
         includeHellTempleNPCs = true;
         includeOptionalContent = true;
+        preserveCustomTabletGlow = true;
     }
 
     public static boolean isChanged() {
@@ -32,6 +34,10 @@ public final class HolidaySettings {
     }
 
     public static boolean isFools2022Mode() {
+        return true;
+    }
+
+    public static boolean isEaster2025Mode() {
         return true;
     }
 
@@ -90,12 +96,23 @@ public final class HolidaySettings {
         singleton.includeOptionalContent = includeOptionalContent;
     }
 
+    public static boolean isPreserveCustomTabletGlow() {
+        return singleton.preserveCustomTabletGlow;
+    }
+
+    public static void setPreserveCustomTabletGlow(boolean preserveCustomTabletGlow, boolean update) {
+        if(update && preserveCustomTabletGlow != singleton.preserveCustomTabletGlow) {
+            singleton.changed = true;
+        }
+        singleton.preserveCustomTabletGlow = preserveCustomTabletGlow;
+    }
+
     public static boolean isSaveFileNeeded() {
-        return isHalloweenMode() || isFools2020Mode() ||isFools2021Mode() || isFools2022Mode();
+        return true;
     }
 
     public static boolean isCustomPlacementValidationDisabled() {
-        return isFools2022Mode();
+        return true;
     }
 
     public static String getResourcePath() {

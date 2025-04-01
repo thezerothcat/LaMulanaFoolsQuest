@@ -317,9 +317,18 @@ public class Fools2022DatUpdater extends DatUpdater {
                 if(mapGraphicsEntry.getIcon2() == MapGraphicsEntry.Icon_DragonBone) {
                     mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Blue);
                 }
+                if(mapGraphicsEntry.getX() == 5 && mapGraphicsEntry.getY() == 4) {
+                    mapGraphicsEntry.setIcon1(MapGraphicsEntry.Icon_FairyPoint);
+                    mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Blue);
+                }
+                if(mapGraphicsEntry.getX() == 5 && mapGraphicsEntry.getY() == 6) {
+                    mapGraphicsEntry.setIcon1(MapGraphicsEntry.Icon_FairyPoint);
+                    mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Blue);
+                }
             }
             else if(mapGraphicsBlock.getBlockNumber() == BlockConstants.MapGraphics_Illusion) {
                 if(mapGraphicsEntry.getX() == 5 && mapGraphicsEntry.getY() == 5) {
+                    mapGraphicsEntry.setIcon1(MapGraphicsEntry.Icon_FairyPoint);
                     mapGraphicsEntry.setIcon2(MapGraphicsEntry.Icon_CrossOfLight);
                     mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Red);
                 }
@@ -357,6 +366,15 @@ public class Fools2022DatUpdater extends DatUpdater {
                 }
             }
             else if((mapGraphicsBlock.getBlockNumber() == BlockConstants.MapGraphics_Birth_Swords || mapGraphicsBlock.getBlockNumber() == BlockConstants.MapGraphics_Birth_Skanda)) {
+                if(mapGraphicsEntry.getX() == 3 && mapGraphicsEntry.getY() == 5) {
+                    mapGraphicsEntry.setIcon1(MapGraphicsEntry.Icon_FairyPoint);
+                    mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Blue);
+                }
+                if(mapGraphicsEntry.getX() == 4 && mapGraphicsEntry.getY() == 2) {
+                    mapGraphicsEntry.setIcon1(MapGraphicsEntry.Icon_FairyPoint);
+                    mapGraphicsEntry.setIcon2(MapGraphicsEntry.Icon_BacksideDoor);
+                    mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Blue);
+                }
                 if(mapGraphicsEntry.getX() == 7 && mapGraphicsEntry.getY() == 6) {
                     mapGraphicsEntry.setIcon2(MapGraphicsEntry.Icon_CrossOfLight);
                     mapGraphicsEntry.setBackgroundColor(MapGraphicsEntry.BackgroundColor_Red);
@@ -843,6 +861,15 @@ public class Fools2022DatUpdater extends DatUpdater {
     }
 
     @Override
+    public void updateXelpudFlagCheckBlock(CheckBlock flagCheckBlock) {
+        BlockListData blockListData = new BlockListData((short)4);
+        blockListData.getData().add((short)FlagConstants.CUSTOM_FOOLS2022_XELPUD_MUSIC_1);
+        blockListData.getData().add((short)1);
+        blockListData.getData().add(getCustomBlockIndex(CustomBlockEnum.Fools2022_Xelpud_Music));
+        blockListData.getData().add((short)0);
+        flagCheckBlock.getFlagCheckReferences().add(0, blockListData);
+    }
+
     public void updateMulbrukFlagCheckBlock(CheckBlock flagCheckBlock) {
         flagCheckBlock.getFlagCheckReferences().clear();
 
@@ -938,6 +965,8 @@ public class Fools2022DatUpdater extends DatUpdater {
 //                buildFairyQueenSlapReferenceBlock(getCustomBlockIndex(CustomBlockEnum.Fools2022_FairyQueenSlap_ConversationBlock)));
         datFileData.addCustomBlock(CustomBlockEnum.Fools2022_XelpudNight_ConversationBlock, buildXelpudNightConversationBlock());
         datFileData.addCustomBlock(CustomBlockEnum.Fools2022_XelpudNight_ReferenceBlock, buildXelpudNightReferenceBlock(getCustomBlockIndex(CustomBlockEnum.Fools2022_XelpudNight_ConversationBlock)));
+        datFileData.addCustomBlock(CustomBlockEnum.Fools2022_Tablet_DimensionalExit_Alt, buildTabletBlock("Tablet_Birth_ClayDollsBecomeHuman.AltText", true));
+        datFileData.addCustomBlock(CustomBlockEnum.Fools2022_Xelpud_Music, buildXelpudMusicConversationBlock());
     }
 
     private static Block buildSnapshotsScanBlock(String textKeyPrefix) {
@@ -993,6 +1022,22 @@ public class Fools2022DatUpdater extends DatUpdater {
         }
         blockContents.add(new BlockFlagData(FlagConstants.MULBRUK_DOOR_UNSEALED, 2));
         blockContents.add(new BlockFlagData(FlagConstants.CONVERSATION_CANT_LEAVE, 0));
+
+        return conversationBlock;
+    }
+
+    private static Block buildXelpudMusicConversationBlock() {
+        Block conversationBlock = new Block();
+
+        List<BlockContents> blockContents = conversationBlock.getBlockContents();
+        for(Short rawDataEntry : buildRawDataWithCommands(Translations.getText("event.fools2022.XelpudMusic1"))) {
+            blockContents.add(new BlockSingleData(rawDataEntry));
+        }
+        blockContents.add(new BlockSingleData(BlockDataConstants.Cls));
+        for(Short rawDataEntry : buildRawDataWithCommands(Translations.getText("event.fools2022.XelpudMusic2"))) {
+            blockContents.add(new BlockSingleData(rawDataEntry));
+        }
+        blockContents.add(new BlockFlagData(FlagConstants.CUSTOM_FOOLS2022_XELPUD_MUSIC_1, 2));
 
         return conversationBlock;
     }

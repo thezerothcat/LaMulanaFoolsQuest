@@ -1072,8 +1072,8 @@ public final class FlagConstants {
 
     public static final List<Integer> TRANSLATION_TABLET_GLOW_FLAGS = Arrays.asList(
             TABLET_GLOW_SHRINE_ROSETTA,
-            TABLET_GLOW_SHRINE_ROSETTA,
-            TABLET_GLOW_SHRINE_ROSETTA
+            TABLET_GLOW_RUIN_ROSETTA,
+            TABLET_GLOW_BIRTH_SWORDS_ROSETTA
     );
 
     // Broken tablets
@@ -1309,6 +1309,9 @@ public final class FlagConstants {
     public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_OTHER_SPAULDER = TABLET_GLOW_BIRTH_SKANDA_ASURAS_ROOM_BROKEN;
     public static final int CUSTOM_FOOLS2022_MOTHER_ARMOR_OTHER_GAUNTLET = OBSOLETE_FREE_FLAG;
     public static final int CUSTOM_FOOLS2022_MISC_VANDALISM = 2781; // 0xadd
+    public static final int CUSTOM_FOOLS2022_TABLET_FLIP = 2699;
+    public static final int CUSTOM_FOOLS2022_ALT_TABLET_GLOW = 2698;
+    public static final int CUSTOM_FOOLS2022_XELPUD_MUSIC_1 = 2697;
     public static final int CUSTOM_FOOLS2022_PACIFIST_PLANE_MODEL = MAIL_43;
     public static final int CUSTOM_FOOLS2022_SPLIT_GATE_UNLOCKED = MAIL_42;
     public static final int CUSTOM_FOOLS2022_PACIFIST_MOTHER_GATE_HINT_GLOW = MAIL_41;

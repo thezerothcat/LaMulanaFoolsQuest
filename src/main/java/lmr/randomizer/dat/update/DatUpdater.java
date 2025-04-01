@@ -6,10 +6,7 @@ import lmr.randomizer.dat.blocks.*;
 import lmr.randomizer.dat.blocks.contents.*;
 import lmr.randomizer.dat.blocks.contents.entries.TextEntry;
 import lmr.randomizer.randomization.data.*;
-import lmr.randomizer.util.BlockDataConstants;
-import lmr.randomizer.util.FlagConstants;
-import lmr.randomizer.util.ItemConstants;
-import lmr.randomizer.util.MantraConstants;
+import lmr.randomizer.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +46,23 @@ public abstract class DatUpdater {
         updatePepperConversationBlock(datFileData.getPepperConversationBlock());
         updateAnchorConversationBlock(datFileData.getAnchorConversationBlock());
         updateXmailerConversationBlock(datFileData.getXmailerConversationBlock());
+//        updateXelpudHeldItemDjedPillarBlock(datFileData.getXelpudHeldItemDjedPillarBlock());
+//        updateXelpudHeldItemMiniDollBlock(datFileData.getXelpudHeldItemMiniDollBlock());
+//        updateXelpudHeldItemMagatamaJewelBlock(datFileData.getXelpudHeldItemMagatamaJewelBlock());
+//        updateXelpudHeldItemCogOfTheSoulBlock(datFileData.getXelpudHeldItemCogOfTheSoulBlock());
+//        updateXelpudHeldItemLampOfTimeBlock(datFileData.getXelpudHeldItemLampOfTimeBlock());
+//        updateXelpudHeldItemPochetteKeyBlock(datFileData.getXelpudHeldItemPochetteKeyBlock());
+//        updateXelpudHeldItemDragonBoneBlock(datFileData.getXelpudHeldItemDragonBoneBlock());
+//        updateXelpudHeldItemCrystalSkullBlock(datFileData.getXelpudHeldItemCrystalSkullBlock());
+//        updateXelpudHeldItemVesselBlock(datFileData.getXelpudHeldItemVesselBlock());
         updateXelpudHeldItemPepperBlock(datFileData.getXelpudHeldItemPepperBlock());
+//        updateXelpudHeldItemWomanStatueBlock(datFileData.getXelpudHeldItemWomanStatueBlock());
+//        updateXelpudHeldItemMaternityStatueBlock(datFileData.getXelpudHeldItemMaternityStatueBlock());
+//        updateXelpudHeldItemKeyOfEternityBlock(datFileData.getXelpudHeldItemKeyOfEternityBlock());
+//        updateXelpudHeldItemSerpentStaffBlock(datFileData.getXelpudHeldItemSerpentStaffBlock());
+//        updateXelpudHeldItemHandScannerBlock(datFileData.getXelpudHeldItemHandScannerBlock());
+//        updateXelpudHeldItemMulanaTalismanBlock(datFileData.getXelpudHeldItemMulanaTalismanBlock());
+
         updateXelpudTalismanConversationBlock(datFileData.getXelpudTalismanConversationBlock());
         updateXelpudPillarConversationBlock(datFileData.getXelpudPillarConversationBlock());
         updateXelpudMSX2ConversationBlock(datFileData.getXelpudMSX2ConversationBlock());
