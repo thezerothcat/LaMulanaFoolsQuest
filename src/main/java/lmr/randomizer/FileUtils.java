@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
  * Created by thezerothcat on 7/10/2017.
  */
 public class FileUtils {
-    public static final String VERSION = "2.0.2";
+    public static final String VERSION = "2.0.3";
 
     private static BufferedWriter logWriter;
     private static final Map<String, String> KNOWN_RCD_FILE_HASHES = new HashMap<>();

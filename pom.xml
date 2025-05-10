@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>lmr.randomizer</groupId>
     <artifactId>fools-quest</artifactId>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <name>La-Mulana Fool's Quest</name>
     <description>La-Mulana Fool's Quest</description>
     <packaging>jar</packaging>
