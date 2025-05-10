@@ -1906,6 +1906,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                 addMailTimer(screen, FlagConstants.MAIL_01);
             }
             if(roomIndex == 1 && screenIndex == 2) {
+                // Cheat detection - Cat Pause for Knife
                 AddObject.addFramesTimer(screen, 0,
                         Arrays.asList(new TestByteOperation(FlagConstants.SUN_WEAPON_COVER_KNIFE, ByteOp.FLAG_EQUALS, 0),
                                 new TestByteOperation(FlagConstants.SCREEN_FLAG_12, ByteOp.FLAG_EQUALS, 1)),
@@ -2037,6 +2038,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         .addUpdates(new WriteByteOperation(FlagConstants.SCREEN_FLAG_2C, ByteOp.ASSIGN_FLAG, 1));
             }
             if(roomIndex == 8 && screenIndex == 0) {
+                // Cheat detection - Lamp Glitch to Viy
                 AddObject.addFramesTimer(screen, 0,
                         Arrays.asList(new TestByteOperation(FlagConstants.BAHAMUT_GATE_OPEN, ByteOp.FLAG_EQUALS, 0)),
                         Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
@@ -2060,10 +2062,28 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.SCREEN_FLAG_29, ByteOp.FLAG_EQUALS, 1),
                         new TestByteOperation(FlagConstants.WF_SHELL_HORN, ByteOp.FLAG_EQUALS, 2)));
                 AddObject.addAnimatedDoorSound(screen);
+
+                // Cheat detection for entering backside door path without using backside door
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
+                                new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.ASSIGN_FLAG, 1)));
+                addMailTimer(screen, FlagConstants.MAIL_16)
+                        .addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.FLAG_GTEQ, 1));
+            }
+            if(roomIndex == 9 && screenIndex == 1) {
+                // Cheat detection for entering backside door path without using backside door
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
+                                new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.ASSIGN_FLAG, 1)));
+                addMailTimer(screen, FlagConstants.MAIL_16)
+                        .addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.FLAG_GTEQ, 1));
             }
         }
         if(zoneIndex == ZoneConstants.EXTINCTION) {
             if(roomIndex != 8 && roomIndex != 9) {
+                // Cheat detection for entering the dark portion of Extinction prior to Origin Seal
                 AddObject.addFramesTimer(screen, 0,
                         Arrays.asList(new TestByteOperation(FlagConstants.WF_ORIGIN_SEAL, ByteOp.FLAG_EQUALS, 0)),
                         Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
@@ -2077,6 +2097,23 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.SCREEN_FLAG_29, ByteOp.FLAG_EQUALS, 1),
                         new TestByteOperation(FlagConstants.WF_SHELL_HORN, ByteOp.FLAG_EQUALS, 2)));
                 AddObject.addAnimatedDoorSound(screen);
+
+                // Cheat detection for entering backside door path without using backside door
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
+                                new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.ASSIGN_FLAG, 1)));
+                addMailTimer(screen, FlagConstants.MAIL_16)
+                        .addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.FLAG_GTEQ, 1));
+            }
+            if(roomIndex == 1 && screenIndex == 1) {
+                // Cheat detection for entering backside door path without using backside door
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
+                                new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.ASSIGN_FLAG, 1)));
+                addMailTimer(screen, FlagConstants.MAIL_16)
+                        .addTests(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.FLAG_GTEQ, 1));
             }
             if(roomIndex == 2 && screenIndex == 0) {
                 AddObject.addMantraDetector(screen, ETERNITY_FIRE)
@@ -2169,6 +2206,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                                 new WriteByteOperation(FlagConstants.SCREEN_FLAG_B, ByteOp.ASSIGN_FLAG, 1));
             }
             if(roomIndex == 10 && screenIndex == 1) {
+                // Cheat detection - raindropping from Dimensional to Twin Labs?
                 AddObject.addFramesTimer(screen, 0,
                         Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_DIMENSIONAL_CHEATS, ByteOp.FLAG_EQUALS, 1)),
                         Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_DIMENSIONAL_CHEATS, ByteOp.ASSIGN_FLAG, 2),
@@ -2250,6 +2288,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
         }
         if (screen.getZoneIndex() == ZoneConstants.ILLUSION) {
             if(roomIndex == 0 && screenIndex == 1) {
+                // Cheat detection - skip breaking wall to stray fairy room
                 AddObject.addFramesTimer(screen, 0,
                         Arrays.asList(new TestByteOperation(FlagConstants.ILLUSION_STRAY_FAIRY_WALL, ByteOp.FLAG_EQUALS, 0)),
                         Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHOSE_VIOLENCE, ByteOp.ASSIGN_FLAG, 1),
@@ -2598,6 +2637,11 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.SCREEN_FLAG_29, ByteOp.FLAG_EQUALS, 1),
                         new TestByteOperation(FlagConstants.WF_SHELL_HORN, ByteOp.FLAG_EQUALS, 2)));
                 AddObject.addAnimatedDoorSound(screen);
+
+                // Cheat detection setup - marks entry to backside door path as legitimately earned
+                AddObject.addFramesTimer(screen, 0,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED, ByteOp.ASSIGN_FLAG, 1)));
             }
             if(screen.getRoomIndex() == 2 && screen.getScreenIndex() == 1) {
                 AddObject.addFramesTimer(screen, 0,
@@ -3352,7 +3396,6 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         .addUpdates(new WriteByteOperation(FlagConstants.ROOM_FLAG_37, ByteOp.ASSIGN_FLAG, 1));
             }
             if(roomIndex == 5 && screenIndex == 1) {
-                addFairyPoint(screen, 920, 560);
                 addJumpPointObjects(screen, 940, 200, 2, true, FlagConstants.SCREEN_FLAG_2C);
             }
             if(roomIndex == 7 && screenIndex == 0) {
@@ -3563,6 +3606,15 @@ public class Fools2022RcdUpdater extends RcdUpdater {
 
                 addJumpPointObjects(screen, 200, 440, 3, true, FlagConstants.SCREEN_FLAG_9,
                         new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_RUIN_UPPER_SHORTCUT, ByteOp.FLAG_EQUALS, 1));
+
+                // Cheat detection - zipping up from grail tablet to medicine area
+                AddObject.addLemezaDetector(screen, 0, 380, 20, 5,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_RUIN_UPPER_SHORTCUT, ByteOp.FLAG_EQUALS, 0)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.SCREEN_FLAG_C, ByteOp.ASSIGN_FLAG, 1)));
+                AddObject.addLemezaDetector(screen, 0, 380, 20, 5,
+                        Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_RUIN_UPPER_SHORTCUT, ByteOp.FLAG_EQUALS, 0),
+                                new TestByteOperation(FlagConstants.SCREEN_FLAG_C, ByteOp.FLAG_EQUALS, 1)),
+                        Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_CHEATED, ByteOp.ASSIGN_FLAG, 1)));
             }
         }
         if(zoneIndex == ZoneConstants.BIRTH_SWORDS) {
@@ -3646,9 +3698,6 @@ public class Fools2022RcdUpdater extends RcdUpdater {
 //            if(roomIndex == 3 && screenIndex == 0) {
 //                // Mother ankh room
 //            }
-            if(roomIndex == 5 && screenIndex == 1) {
-                addFairyPoint(screen, 920, 560);
-            }
             if(roomIndex == 8 && screenIndex == 1) {
                 addFairyPoint(screen, 580, 560);
             }
@@ -5525,6 +5574,7 @@ public class Fools2022RcdUpdater extends RcdUpdater {
                         new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_MISC_VIOLENCE, ByteOp.FLAG_EQUALS, 0),
                         new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_BOSSES_DEAD, ByteOp.FLAG_EQUALS, 0)),
                 Arrays.asList(new WriteByteOperation(FlagConstants.CUSTOM_FOOLS2022_MOTHER_MAIL_STATE, ByteOp.ASSIGN_FLAG, 1)));
+
         AddObject.addFramesTimer(screen, 0,
                 Arrays.asList(new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_MOTHER_MAIL_STATE, ByteOp.FLAG_LTEQ, 1),
                         new TestByteOperation(FlagConstants.CUSTOM_FOOLS2022_MISC_VIOLENCE, ByteOp.FLAG_EQUALS, 1),

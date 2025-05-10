@@ -86,7 +86,7 @@ public class FlagManager {
         for(int flag = FIRST_AVAILABLE_RANDOM_GRAPHICS_FLAG; flag < LAST_AVAILABLE_RANDOM_GRAPHICS_FLAG; flag++) {
             availableFlags.add(flag);
         }
-        for(int flag = (HolidaySettings.isFools2022Mode() ? 2696 : 2699); flag >= 2600; flag--) {
+        for(int flag = (HolidaySettings.isFools2022Mode() ? 2695 : 2699); flag >= 2600; flag--) {
             availableFlags.add(flag);
         }
         return availableFlags;

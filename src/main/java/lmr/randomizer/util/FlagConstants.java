@@ -1312,6 +1312,7 @@ public final class FlagConstants {
     public static final int CUSTOM_FOOLS2022_TABLET_FLIP = 2699;
     public static final int CUSTOM_FOOLS2022_ALT_TABLET_GLOW = 2698;
     public static final int CUSTOM_FOOLS2022_XELPUD_MUSIC_1 = 2697;
+    public static final int CUSTOM_FOOLS2022_BIRTH_DOOR_REACHED = 2696;
     public static final int CUSTOM_FOOLS2022_PACIFIST_PLANE_MODEL = MAIL_43;
     public static final int CUSTOM_FOOLS2022_SPLIT_GATE_UNLOCKED = MAIL_42;
     public static final int CUSTOM_FOOLS2022_PACIFIST_MOTHER_GATE_HINT_GLOW = MAIL_41;
